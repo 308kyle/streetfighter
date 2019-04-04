@@ -38,12 +38,11 @@ public class StreetFighter extends JFrame {
 		long current = System.currentTimeMillis();
 		long target = current + mpf;
 		while(true) {
-			current = System.currentTimeMillis();
-			
+			current = System.currentTimeMillis();		
 			if(current<target) {
 				return;
 			}
-			
+			target = current+current-target;
 			
 		}
 	}
