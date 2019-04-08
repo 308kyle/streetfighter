@@ -16,10 +16,12 @@ public class Screen extends JPanel {
 		this.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize()));
 	}
 	public void move() {
-		x+=5;
-		y+=5;
+		x+=1;
+		y+=1;
+		repaint();
 	}
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		g.fillRect(x, y, SpriteSheet.spriteSize, SpriteSheet.spriteSize);
 	}
 }

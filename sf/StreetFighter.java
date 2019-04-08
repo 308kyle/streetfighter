@@ -7,8 +7,6 @@ import javax.swing.JFrame;
 
 public class StreetFighter extends JFrame {
 	
-	
-	
 	public StreetFighter() {
 		super("Street Fighter");
 		
@@ -26,26 +24,37 @@ public class StreetFighter extends JFrame {
 
 			}
 		});
-		Screen main = new Screen();
-		this.add(main);
+		Screen s = new Screen();
+		this.add(s);
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setUndecorated(true);
 		this.pack();
 		this.setVisible(true);
-		//main game loop
-		int fps = 30;
-		int mpf = 1000/fps;
-		long current = System.currentTimeMillis();
-		long target = current + mpf;
-		while(true) {
-			current = System.currentTimeMillis();		
-			if(current<target) {
-				return;
+		
+		new Thread() {
+			public void run() {
+				gameLoop(s);
 			}
-			target = current+current-target;
+		}.start();
+
+	}	
+	public void gameLoop(Screen s) {
+		final int fps = 60;
+		final int targetMillis = 1000/fps;
+		long last_time = System.currentTimeMillis();
+		long target_time = last_time + targetMillis;
+		
+		while(true) {
+			long current = System.currentTimeMillis();
+			if(current>=target_time) {
+				last_time = current;
+				target_time = target_time + targetMillis;
+				s.move();
+			}
 			
 		}
 	}
+		
 	public static void main(String[] str) {
 		new StreetFighter();
 	}
