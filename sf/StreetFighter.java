@@ -15,6 +15,7 @@ public class StreetFighter extends JFrame {
 				int key = e.getKeyCode();
 				if(key==KeyEvent.VK_ESCAPE) {
 					dispose();
+					
 				}
 			}
 			public void keyReleased(KeyEvent e) {
@@ -26,7 +27,7 @@ public class StreetFighter extends JFrame {
 		});
 		Screen s = new Screen();
 		this.add(s);
-		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setUndecorated(true);
 		this.pack();
 		this.setVisible(true);
@@ -51,10 +52,9 @@ public class StreetFighter extends JFrame {
 				target_time = target_time + targetMillis;
 				s.move();
 			}
-			
 		}
 	}
-		
+	
 	public static void main(String[] str) {
 		new StreetFighter();
 	}
