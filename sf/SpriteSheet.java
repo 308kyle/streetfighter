@@ -7,7 +7,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class SpriteSheet {
-	final static int spriteSize = 50;
 	
 	BufferedImage spriteSheet;
 	
@@ -15,10 +14,14 @@ public class SpriteSheet {
 		try {
 			spriteSheet = ImageIO.read(new File(fileName));
 		} catch (IOException e) {
+			System.out.println("error");
 			e.printStackTrace();
 		}
 	}
-	public BufferedImage getSprite(int r, int c) {
-		return spriteSheet.getSubimage(c*spriteSize, r*spriteSize, spriteSize, spriteSize);
+//	public BufferedImage getSprite(int r, int c, int width, int height) {
+//		return spriteSheet.getSubimage(c*height, r*width, width, height);
+//	}
+	public BufferedImage getSprite(int x, int y, int width, int height) {
+		return spriteSheet.getSubimage(x, y, width, height);
 	}
 }
