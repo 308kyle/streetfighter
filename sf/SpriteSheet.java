@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import javafx.scene.transform.Scale;
+
 public class SpriteSheet {
 	
 	BufferedImage spriteSheet;
@@ -22,6 +24,8 @@ public class SpriteSheet {
 //		return spriteSheet.getSubimage(c*height, r*width, width, height);
 //	}
 	public BufferedImage getSprite(int x, int y, int width, int height) {
-		return spriteSheet.getSubimage(x, y, width, height);
+		BufferedImage sprite = spriteSheet.getSubimage(x, y, width, height);
+		return null;
+	
 	}
 }
