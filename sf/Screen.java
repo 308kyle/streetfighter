@@ -13,14 +13,17 @@ public class Screen extends JPanel {
 	Fighter two;
 	int x = 0;
 	int y = 0;
-	public Screen(Fighter one) {
+	int[] frames;
+	public Screen(Fighter one, int[] frames) {
 		super();
+		this.frames = frames;
 		this.setBackground(Color.white);
 		this.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize()));
+		this.one = one;
 	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(one.getSheet().getSprite(0, 0, 50, 100), x, y, null);
+		one.draw(g, frames[0]);
 	}
 }

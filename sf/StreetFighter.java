@@ -6,11 +6,11 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 
 public class StreetFighter extends JFrame {
-	Fighter a = new Fighter(15, 15, 1, 1, "ryu.png");
+	Fighter a = new Fighter("ryu good transparent.png");
 	private boolean rightPressed = false;
 	private boolean crouchPressed = false;
 	private boolean leftPressed = false;
-
+	
 	public StreetFighter() {
 		super("Street Fighter");
 
@@ -59,8 +59,8 @@ public class StreetFighter extends JFrame {
 				
 			}
 		});
-		
-		Screen s = new Screen(a);
+		int[] frames = new int[1];
+		Screen s = new Screen(a, frames);
 		this.add(s);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setUndecorated(true);
@@ -69,27 +69,31 @@ public class StreetFighter extends JFrame {
 
 		new Thread() {
 			public void run() {
-				gameLoop();
+				gameLoop(s, frames);
 			}
 		}.start();
 	}	
 	
-	public void move() {
+	public void move(int frames) {
 		
 	}
 
-	public void gameLoop() {
+	public void gameLoop(Screen s, int[] frames) {
 		final int fps = 60;
 		final int targetMillis = 1000/fps;
 		long last_time = System.currentTimeMillis();
 		long target_time = last_time + targetMillis;
-
+		
 		while(true) {
 			long current = System.currentTimeMillis();
 			if(current>=target_time) {
+				if(frames[0]==60) {
+					frames[0]=0;
+				}
 				last_time = current;
 				target_time = target_time + targetMillis;
-				this.move();
+				s.repaint();
+				frames[0]++;
 			}
 		}
 	}
