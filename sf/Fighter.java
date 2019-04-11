@@ -4,26 +4,37 @@ import java.awt.Graphics;
 
 public class Fighter {
 	private SpriteSheet s;
-
 	private AnimatedSprite walk;
-	private double x;
-	private double y;
-	private double velx;
-	private double vely;
+	private int x;
+	private int y;
+	private int velx;
+	private int vely;
 	private int grav = 5;
 	
-	public Fighter(double xpos, double ypos, double vx, double vy, String filename) {
+	
+	public Fighter(String filename) {
+		
 		s = new SpriteSheet(filename);
-		x = xpos;
-		y = ypos;
-		velx = vx;
-		vely = vy;
+		
+		walk = new AnimatedSprite(s,4, new int[][] {{0, 10, 50, 90},
+													{50, 10, 50, 90},
+													{100, 10, 50, 90},
+													{150, 10, 50, 90}});
+		
+		if(filename.equals("ryu good transparent.png")) {
+			
+		}
+		x = 100;
+		y = 100;
+		velx = 5;
+		vely = 0;
 	}
 	public SpriteSheet getSheet() {
 		return s;
 	}
-	public void draw(Graphics g) {
-		g.drawImage(s.getSprite(0, 0, 60, 100), (int)x, (int)y, null);
+	public void draw(Graphics g, int frames) {
+		walk.update(frames);
+		g.drawImage(walk.update(frames), 100, 100, null);
 	}
 	public double getX() {
 		return x;
@@ -37,16 +48,16 @@ public class Fighter {
 	public double getVely() {
 		return vely;
 	}
-	public void setX(double a) {
+	public void setX(int a) {
 		x = a;
 	}
-	public void setY(double a) {
+	public void setY(int a) {
 		y = a;
 	}
-	public void setVelx(double a) {
+	public void setVelx(int a) {
 		velx = a;
 	}
-	public void setVely(double a) {
+	public void setVely(int a) {
 		vely = a;
 	}
 }
