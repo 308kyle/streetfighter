@@ -4,22 +4,27 @@ import java.awt.Graphics;
 
 public class Fighter {
 	private SpriteSheet s;
-	private AnimatedSprite walk;
+	private AnimatedSprite ryuIdle;
+	private AnimatedSprite ryuWalk;
+	private AnimatedSprite ryu;
 	private int x;
 	private int y;
 	private int velx;
 	private int vely;
 	private int grav = 5;
-	
-	
+		
 	public Fighter(String filename) {
 		
 		s = new SpriteSheet(filename);
-		
-		walk = new AnimatedSprite(s,4, new int[][] {{0, 10, 50, 90},
-													{50, 10, 50, 90},
-													{100, 10, 50, 90},
-													{150, 10, 50, 90}});
+		ryuIdle = new AnimatedSprite(s, 4, new int[][] {{0, 10, 50, 90},
+														{50, 10, 50, 90},
+														{100, 10, 50, 90},
+														{150, 10, 50, 90}});
+		ryuWalk = new AnimatedSprite(s, 3, new int[][] {{200, 10, 40, 90},
+														{250, 10, 40, 90},
+														{300, 10, 40, 90},
+														{350, 10, 40, 90},
+														{400, 10, 40, 90}});
 		
 		if(filename.equals("ryu good transparent.png")) {
 			
@@ -33,8 +38,7 @@ public class Fighter {
 		return s;
 	}
 	public void draw(Graphics g, int frames) {
-		walk.update(frames);
-		g.drawImage(walk.update(frames), 100, 100, null);
+		g.drawImage(ryuWalk.update(frames, 60), 100, 100, null);
 	}
 	public double getX() {
 		return x;
