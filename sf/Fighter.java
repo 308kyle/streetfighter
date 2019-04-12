@@ -34,8 +34,7 @@ public class Fighter {
 	}
 	public void draw(Graphics g, int frames) {
 		g.drawImage(idle.update(frames,1), x, y, null);
-		System.out.println(x);
-		System.out.println(y);
+		
 	}
 	public int getX() {
 		return x;
