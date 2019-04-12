@@ -20,12 +20,17 @@ public class Fighter {
 														{50, 10, 50, 90},
 														{100, 10, 50, 90},
 														{150, 10, 50, 90}});
-		ryuWalk = new AnimatedSprite(s, 3, new int[][] {{200, 10, 40, 90},
-														{250, 10, 40, 90},
-														{300, 10, 40, 90},
-														{350, 10, 40, 90},
-														{400, 10, 40, 90}});
 		
+		ryuWalk = new AnimatedSprite(s, 5, new int[][] {{200, 10, 50, 90},
+														{250, 10, 50, 90},
+														{300, 10, 50, 90},
+														{350, 10, 50, 90},
+														{400, 10, 50, 90}});
+		ryuWalk = new AnimatedSprite(s, 3, new int[][] {
+			{250, 10, 50, 90},
+			{300, 10, 50, 90},
+			{350, 10, 50, 90}}
+			);
 		if(filename.equals("ryu good transparent.png")) {
 			
 		}

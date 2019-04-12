@@ -12,7 +12,7 @@ public class AnimatedSprite {
 	
 	public AnimatedSprite(SpriteSheet s, int num, int[][] coords) {
 		for(int i=0;i<coords.length;i++) {
-			addSprite(s.getSprite(coords[i][0], coords[i][1], coords[i][2], coords[i][3], 2));
+			addSprite(s.getSprite(coords[i][0], coords[i][1], coords[i][2], coords[i][3], 3));
 		}
 	}
 	private void addSprite(BufferedImage i) {
