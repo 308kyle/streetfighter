@@ -1,5 +1,6 @@
 package sf;
 
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -19,19 +20,22 @@ public class StreetFighter extends JFrame {
 				int key = e.getKeyCode();
 				if(key==KeyEvent.VK_ESCAPE) {
 					dispose();
-					System.exit(0);
 				}
+
 				if (key == KeyEvent.VK_W) {
 
 				}
 				if (key == KeyEvent.VK_A) {
+					System.out.println("aaaaaaaaaa");
 					leftPressed = true;
 				}
 				if (key == KeyEvent.VK_S) {
 					crouchPressed = true;
 				}
 				if (key == KeyEvent.VK_D) {
+					
 					rightPressed = true;
+					System.out.println("ddddddddddddd");
 				}
 				if (key == KeyEvent.VK_J) {
 
@@ -73,6 +77,29 @@ public class StreetFighter extends JFrame {
 		}.start();
 	}	
 
+	
+	public void move() {
+		int x = a.getX();
+		int y = a.getY();
+		int vx = a.getVelx();
+		int vy = a.getVely();
+		if(rightPressed) {
+			if(x>Toolkit.getDefaultToolkit().getScreenSize().getWidth()) {
+				a.setX((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth());
+			}else {
+				a.setX(x+vx);
+			}
+		}
+		if(leftPressed) {
+			if(x<0) {
+				a.setX(0);
+			}else {
+				a.setX(x-vx);
+			}
+		}
+
+
+
 	public void gameLoop(Screen s, int[] frames) {
 		final int fps = 60;
 		final int targetMillis = 1000/fps;
@@ -87,6 +114,8 @@ public class StreetFighter extends JFrame {
 				}
 				last_time = current;
 				target_time = target_time + targetMillis;
+				s.repaint();
+				move();
 				s.repaint();
 				frames[0]++;
 			}
