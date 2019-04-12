@@ -19,8 +19,8 @@ public class StreetFighter extends JFrame {
 				int key = e.getKeyCode();
 				if(key==KeyEvent.VK_ESCAPE) {
 					dispose();
+					System.exit(0);
 				}
-
 				if (key == KeyEvent.VK_W) {
 
 				}
