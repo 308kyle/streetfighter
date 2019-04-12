@@ -97,15 +97,7 @@ public class StreetFighter extends JFrame {
 				a.setX(x-vx);
 			}
 		}
-//		if(a.getY()<400) {
-//			a.setY(y+vy);
-//			a.setVely(vy-1);
-//		}
-//		if(a.getY()>=400) {
-//			a.setY(y-vy);
-//			a.setVely(vy+1);
-//		}
-	}
+
 
 	public void gameLoop(Screen s, int[] frames) {
 		final int fps = 60;
