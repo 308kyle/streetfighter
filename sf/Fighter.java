@@ -4,7 +4,8 @@ import java.awt.Graphics;
 
 public class Fighter {
 	private SpriteSheet s;
-	private AnimatedSprite idle;
+	private AnimatedSprite ryuIdle;
+	private AnimatedSprite ryuWalk;
 	private int x;
 	private int y;
 	private int velx;
@@ -29,11 +30,7 @@ public class Fighter {
 														{300, 10, 50, 90},
 														{350, 10, 50, 90},
 														{400, 10, 50, 90}});
-		ryuWalk = new AnimatedSprite(s, 3, new int[][] {
-			{250, 10, 50, 90},
-			{300, 10, 50, 90},
-			{350, 10, 50, 90}}
-			);
+
 		if(filename.equals("ryu good transparent.png")) {
 			
 		}
@@ -46,7 +43,7 @@ public class Fighter {
 		return s;
 	}
 	public void draw(Graphics g, int frames) {
-		g.drawImage(idle.update(frames,1), x, y, null);
+		g.drawImage(ryuWalk.update(frames, 60), x, y, null);
 		
 	}
 	public int getX() {

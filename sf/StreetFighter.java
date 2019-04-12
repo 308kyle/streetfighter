@@ -20,13 +20,13 @@ public class StreetFighter extends JFrame {
 				int key = e.getKeyCode();
 				if(key==KeyEvent.VK_ESCAPE) {
 					dispose();
+					System.exit(0);
 				}
 
 				if (key == KeyEvent.VK_W) {
 
 				}
 				if (key == KeyEvent.VK_A) {
-					System.out.println("aaaaaaaaaa");
 					leftPressed = true;
 				}
 				if (key == KeyEvent.VK_S) {
@@ -35,7 +35,6 @@ public class StreetFighter extends JFrame {
 				if (key == KeyEvent.VK_D) {
 					
 					rightPressed = true;
-					System.out.println("ddddddddddddd");
 				}
 				if (key == KeyEvent.VK_J) {
 
@@ -97,7 +96,7 @@ public class StreetFighter extends JFrame {
 				a.setX(x-vx);
 			}
 		}
-
+	}
 
 
 	public void gameLoop(Screen s, int[] frames) {
@@ -114,7 +113,6 @@ public class StreetFighter extends JFrame {
 				}
 				last_time = current;
 				target_time = target_time + targetMillis;
-				s.repaint();
 				move();
 				s.repaint();
 				frames[0]++;
