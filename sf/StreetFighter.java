@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 
 public class StreetFighter extends JFrame {
-	Fighter a = new Fighter("ryu good transparent.png");
+	Fighter a = new Fighter("ryu transparent.png");
 	private boolean rightPressed = false;
 	private boolean crouchPressed = false;
 	private boolean leftPressed = false;
@@ -70,13 +70,13 @@ public class StreetFighter extends JFrame {
 		this.setUndecorated(true);
 		this.pack();
 		this.setVisible(true);
-
 		new Thread() {
 			public void run() {
 				gameLoop(s, frames);
 			}
 		}.start();
 	}	
+
 	
 	public void move() {
 		int x = a.getX();
@@ -97,6 +97,7 @@ public class StreetFighter extends JFrame {
 				a.setX(x-vx);
 			}
 		}
+
 
 
 	public void gameLoop(Screen s, int[] frames) {
