@@ -17,6 +17,8 @@ public class Screen extends JPanel {
 	public Screen(Fighter one, int[] frames) {
 		super();
 		this.frames = frames;
+		this.one = one;
+
 		this.setBackground(Color.white);
 		this.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize()));
 		this.one = one;
