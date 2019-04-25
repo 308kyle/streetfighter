@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 
 public class StreetFighter extends JFrame {
 	Fighter a = new Fighter("ryu transparent.png");
+	
 	private boolean rightPressed = false;
 	private boolean crouchPressed = false;
 	private boolean leftPressed = false;
@@ -27,14 +28,20 @@ public class StreetFighter extends JFrame {
 
 				}
 				if (key == KeyEvent.VK_A) {
+					a.current = a.ryuWalk;
 					leftPressed = true;
+					a.current.reverse();
+					a.current.start();
+				
 				}
 				if (key == KeyEvent.VK_S) {
 					crouchPressed = true;
 				}
 				if (key == KeyEvent.VK_D) {
-					
+					a.current = a.ryuWalk;
 					rightPressed = true;
+					a.current.start();
+
 				}
 				if (key == KeyEvent.VK_J) {
 
@@ -50,12 +57,19 @@ public class StreetFighter extends JFrame {
 				int key = e.getKeyCode();
 				if (key == KeyEvent.VK_A) {
 					leftPressed = false;
+					a.current.reset();
+					a.current = a.ryuIdle;
+					a.current.start();
 				}
 				if (key == KeyEvent.VK_S) {
 					crouchPressed = false;
+
 				}
 				if (key == KeyEvent.VK_D) {
 					rightPressed = false;
+					a.current.reset();
+					a.current = a.ryuIdle;
+					a.current.start();
 				}
 			}
 			public void keyTyped(KeyEvent arg0) {
@@ -76,7 +90,6 @@ public class StreetFighter extends JFrame {
 		}.start();
 	}	
 
-	
 	public void move() {
 		int x = a.getX();
 		int y = a.getY();
@@ -98,12 +111,13 @@ public class StreetFighter extends JFrame {
 		}
 	}
 
-
 	public void gameLoop(Screen s, int[] frames) {
 		final int fps = 60;
 		final int targetMillis = 1000/fps;
 		long last_time = System.currentTimeMillis();
 		long target_time = last_time + targetMillis;
+		
+		a.current.start();
 		
 		while(true) {
 			long current = System.currentTimeMillis();
@@ -114,6 +128,7 @@ public class StreetFighter extends JFrame {
 				last_time = current;
 				target_time = target_time + targetMillis;
 				move();
+				a.current.update(frames[0]);
 				s.repaint();
 				frames[0]++;
 			}
