@@ -96,16 +96,12 @@ public class StreetFighter extends JFrame {
 		int vx = a.getVelx();
 		int vy = a.getVely();
 		if(rightPressed) {
-			if(x>Toolkit.getDefaultToolkit().getScreenSize().getWidth()) {
-				a.setX((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth());
-			}else {
+			if(!(x>Toolkit.getDefaultToolkit().getScreenSize().getWidth()-125)) {
 				a.setX(x+vx);
 			}
 		}
 		if(leftPressed) {
-			if(x<0) {
-				a.setX(0);
-			}else {
+			if(!(x<0)) {
 				a.setX(x-vx);
 			}
 		}
