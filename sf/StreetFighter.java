@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 
 public class StreetFighter extends JFrame {
 	Fighter a = new Fighter("ryu transparent.png");
-	
 	private boolean rightPressed = false;
+	private boolean jumpPressed = false;
 	private boolean crouchPressed = false;
 	private boolean leftPressed = false;
 	
@@ -25,7 +25,7 @@ public class StreetFighter extends JFrame {
 				}
 
 				if (key == KeyEvent.VK_W) {
-
+					jumpPressed = true;
 				}
 				if (key == KeyEvent.VK_A) {
 					a.current = a.ryuWalk;
@@ -103,6 +103,14 @@ public class StreetFighter extends JFrame {
 		if(leftPressed) {
 			if(!(x<0)) {
 				a.setX(x-vx);
+			}
+		}
+		if(jumpPressed) {
+			if(a.getY()>240) {
+				a.setY(a.getY()-a.getVely());
+			}
+			if(a.getY()<=240) {
+				a.setY(a.getY()+a.getVely());
 			}
 		}
 	}

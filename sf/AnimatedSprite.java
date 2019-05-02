@@ -16,7 +16,7 @@ public class AnimatedSprite {
 
 	public AnimatedSprite(SpriteSheet s, int frameDelay, int frameDuration, int[][] coords) {
 		for(int i=0;i<coords.length;i++) {
-			addSprite(s.getSprite(coords[i][0], coords[i][1], coords[i][2], coords[i][3], 3));
+			addSprite(s.getSprite(coords[i][0], coords[i][1], coords[i][2], coords[i][3], 4));
 		}
 		this.frameDelay = frameDelay;
 		stop = true;
