@@ -31,9 +31,9 @@ public class Fighter {
 			
 		}
 		x = 100;
-		y = 100;
+		y = 450;
 		velx = 4;
-		vely = 10;
+		vely = 7;
 		current = ryuIdle;
 		
 	}
@@ -42,7 +42,6 @@ public class Fighter {
 	}
 	public void draw(Graphics g, int frames) {
 		g.drawImage(current.getSprite(), x, y, null);
-		
 	}
 	public int getX() {
 		return x;
