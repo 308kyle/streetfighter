@@ -13,8 +13,8 @@ public class Screen extends JPanel {
 	Fighter two;
 	int x = 0;
 	int y = 0;
-	int[] frames;
-	public Screen(Fighter one, int[] frames) {
+	MutableInt frames;
+	public Screen(Fighter one, MutableInt frames) {
 		super();
 		this.frames = frames;
 		this.one = one;
@@ -26,6 +26,6 @@ public class Screen extends JPanel {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		one.draw(g, frames[0]);
+		one.draw(g, frames.getInt());
 	}
 }
