@@ -18,6 +18,7 @@ public class StreetFighter extends JFrame {
 	ArrayList<Integer> inputs = new ArrayList<Integer>();
 	Set<Integer> pressed = new HashSet<Integer>();
 	
+	
 	boolean cancellable;
 	
 	public StreetFighter() {
@@ -27,10 +28,12 @@ public class StreetFighter extends JFrame {
 			public synchronized void keyPressed(KeyEvent e) {
 				int key = e.getKeyCode();
 				pressed.add(key);
-				
-				if(inputs.size()>5) {
-					inputs.remove(0);
+				if(!inputs.contains(key)) {
+					inputs.add(key);
 				}
+				
+				
+				
 				
 				AnimatedSprite next = a.ryuIdle;
 				boolean t;
@@ -122,7 +125,8 @@ public class StreetFighter extends JFrame {
 			public synchronized void keyReleased(KeyEvent e) {
 				int key = e.getKeyCode();
 				pressed.remove(key);
-				inputs.add(key);
+				
+				inputs.remove(new Integer(key));
 				if(cancellable)
 					a.current.reset();
 //				if (key == KeyEvent.VK_A) {
@@ -194,7 +198,6 @@ public class StreetFighter extends JFrame {
 					a.current.start();
 				}
 				cancellable = a.current.update(a.getX(), a.getY());
-				
 				
 				s.repaint();
 				frames.setInt(frames.getInt()+1);

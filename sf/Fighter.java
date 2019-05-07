@@ -41,7 +41,7 @@ public class Fighter {
 																			{274, 130, 72, 85},
 																			{353, 130, 51, 85},
 																			{411, 134, 43, 81}});
-		ryuJump = new AnimatedSprite(s, 0, 60, false, false, new int [7], new int[] {-10,-10,-10,0,10,10,10}, new int[][] {{452, 24, 43, 75},
+		ryuJump = new AnimatedSprite(s, 0, 50, false, false, new int [7], new int[] {-10,-10,-10,0,10,10,10}, new int[][] {{452, 24, 43, 75},
 																			{503, 9, 33, 90},
 																			{545, 17, 29, 78},
 																			{582, 19, 31, 67},
