@@ -36,4 +36,5 @@ public class Sprite {
 	public void createBox() {
 		box.add(new Rectangle(w, h));
 	}
+	
 }
