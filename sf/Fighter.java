@@ -41,20 +41,18 @@ public class Fighter {
 																			{274, 130, 72, 85},
 																			{353, 130, 51, 85},
 																			{411, 134, 43, 81}});
-		ryuJump = new AnimatedSprite(s, 0, 50, false, false, new int [7], new int[] {-10,-10,-10,0,10,10,10}, new int[][] {{452, 24, 43, 75},
+		ryuJump = new AnimatedSprite(s, 0, 45, false, false, new int [7], new int[] {-10,-10,-10,0,10,10,10}, new int[][] {{452, 24, 43, 75},
 																			{503, 9, 33, 90},
 																			{545, 17, 29, 78},
 																			{582, 19, 31, 67},
 																			{619, 17, 29, 78},
 																			{656, 9, 33, 90},
 																			{696, 24, 43, 75}});
-		
 		if(filename.equals("ryu good transparent.png")) {
 			
 		}
 		x = new MutableInt(100);
 		y = new MutableInt(600);
-		
 		
 		current = ryuIdle;
 		
