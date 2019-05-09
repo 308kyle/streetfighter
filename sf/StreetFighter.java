@@ -4,164 +4,87 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
 import javax.swing.JFrame;
 
+
 public class StreetFighter extends JFrame {
 	Fighter a = new Fighter("ryu transparent.png");
 	
 //	Queue<Integer> inputs = new LinkedList<Integer>();
-	ArrayList<Integer> inputs = new ArrayList<Integer>();
-	Set<Integer> pressed = new HashSet<Integer>();
+	ArrayList<Integer> pressed = new ArrayList<Integer>();
+	Map<Integer, AnimatedSprite> map = new HashMap<Integer, AnimatedSprite>();
+//	Set<Integer> pressed = new HashSet<Integer>();
 	
+	AnimatedSprite next;
 	
 	boolean cancellable;
+	boolean change;
 	
 	public StreetFighter() {
 		super("Street Fighter");
 
+		map.put(KeyEvent.VK_LEFT, a.ryuWalk);
+		//map.put(KeyEvent.VK_DOWN, a.ryuWalk);
+		map.put(KeyEvent.VK_RIGHT, a.ryuWalk);
+		map.put(KeyEvent.VK_UP, a.ryuJump);
+		map.put(KeyEvent.VK_A, a.ryuPunch);
+		map.put(KeyEvent.VK_S, a.ryuPunch2);
+		
 		this.addKeyListener(new KeyListener() {	
 			public synchronized void keyPressed(KeyEvent e) {
 				int key = e.getKeyCode();
 				pressed.add(key);
-				if(!inputs.contains(key)) {
-					inputs.add(key);
+				
+				if(pressed.size()>1) {
+					
+					
+					return;
 				}
+			//	next = a.ryuIdle;
 				
-				
-				
-				
-				AnimatedSprite next = a.ryuIdle;
-				boolean t;
-				
-
-				if(pressed.contains(KeyEvent.VK_ESCAPE)) {
-					dispose();
-					System.exit(0);
-				}
-				if(cancellable) {
-					if(pressed.contains(KeyEvent.VK_LEFT)) {
-						next = a.ryuWalk;
-						next.reverse();
-					}
-					else if(pressed.contains(KeyEvent.VK_RIGHT)) {
-						next = a.ryuWalk;
-					}
-					else if(pressed.contains(KeyEvent.VK_UP)) {
-						next = a.ryuJump;
-					} 
-					else {
-						next = null;
-					}
-					if(next!=null) {
-						a.current.reset();
-						a.current = next;
-						a.current.start();
-					}
-				}	
-
-//				if(key==KeyEvent.VK_ESCAPE) {
+//				if(pressed.contains(KeyEvent.VK_ESCAPE)) {
 //					dispose();
 //					System.exit(0);
 //				}
-//				if (key == KeyEvent.VK_W) {
-//					if(cancellable) {
 //
-//				
-//					a.current = a.ryuJump;
-//					a.current.start();
-//					}
+//				if(pressed.contains(KeyEvent.VK_LEFT)) {
+//					next = a.ryuWalk;
+//					next.reverse();
 //				}
-//				if (key == KeyEvent.VK_A) {
-//					
-//					
-//					System.out.println(cancellable);
-//					if(cancellable) {
-//						a.current = a.ryuWalk;
-//						leftPressed = true;
-//						a.current.reverse();
-//						a.current.start();
-//					}
-//
+//				else if(pressed.contains(KeyEvent.VK_RIGHT)) {
+//					next = a.ryuWalk;
 //				}
-//				if (key == KeyEvent.VK_S) {
-//					crouchPressed = true;
-//				}
-//				if (key == KeyEvent.VK_D) {
-//					if(cancellable) {
-//
-//				
-//					a.current = a.ryuWalk;
-//					rightPressed = true;
-//					a.current.start();
-//					}
-//				}
-//				if (key == KeyEvent.VK_J) {
-//					if(cancellable) {
-//
-//				
-//					a.current = a.ryuPunch;
-//					a.current.start();
-//					}
-//				}
-//				if (key == KeyEvent.VK_K) {
-//					if(cancellable) {
-//
-//					a.current = a.ryuPunch2;
-//					a.current.start();
-//					}
-//				}
-//				if (key == KeyEvent.VK_L) {
-//
-//				}
+//				else if(pressed.contains(KeyEvent.VK_UP)) {
+//					next = a.ryuJump;
+//				} 
 				
-				
+				if(map.get(key)!=null&cancellable) {
+					a.current.reset();
+					a.current = map.get(key);
+					a.current.start();
+				}
 				
 			}
 			public synchronized void keyReleased(KeyEvent e) {
 				int key = e.getKeyCode();
-				pressed.remove(key);
+				pressed.remove(new Integer(key));
 				
-				inputs.remove(new Integer(key));
-				if(cancellable)
-					a.current.reset();
-//				if (key == KeyEvent.VK_A) {
-//					if(cancellable) {
-//
-//					
-//					a.current.reset();
-//					leftPressed = false;
-//					a.current = a.ryuIdle;
-//					a.current.reset();
-//					a.current.start();
-//					}
-//				}
-//				if (key == KeyEvent.VK_S) {
-//					crouchPressed = false;
-//
-//				}
-//				if (key == KeyEvent.VK_D) {
-//					if(cancellable) {
-//
-//
-//					a.current.reset();
-//
-//					rightPressed = false;
-//
-//					a.current = a.ryuIdle;
-//					a.current.reset();
-//					a.current.start();
-//					}
-//				}
+				
+				
+				
 			}
 			public void keyTyped(KeyEvent arg0) {
 
 			}
 		});
+		
 		MutableInt frames = new MutableInt(0);
 		Screen s = new Screen(a, frames);
 		this.add(s);
@@ -174,8 +97,18 @@ public class StreetFighter extends JFrame {
 				gameLoop(s, frames);
 			}
 		}.start();
-	}	
+	}
 
+	public void move() {
+		if(next!=null) {
+			a.current.reset();
+			a.current = next;
+			a.current.start();
+		} else {
+			a.current = a.ryuIdle;
+		}
+	}
+	
 	public void gameLoop(Screen s, MutableInt frames) {
 		final int fps = 60;
 		final int targetMillis = 1000/fps;

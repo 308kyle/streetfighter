@@ -15,6 +15,8 @@ public class Fighter {
 	private MutableInt x;
 	private MutableInt y;
 	
+	private int direction = 1;
+	
 	private int grav = 5;
 	
 	public Fighter(String filename) {
