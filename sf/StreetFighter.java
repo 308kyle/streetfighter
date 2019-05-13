@@ -39,15 +39,16 @@ public class StreetFighter extends JFrame {
 		
 		this.addKeyListener(new KeyListener() {	
 			public synchronized void keyPressed(KeyEvent e) {
+		
 				int key = e.getKeyCode();
-				pressed.add(key);
-				
+				if(!pressed.contains(new Integer(key))) {
+					pressed.add(key);
+				}
 				if(pressed.size()>1) {
 					
 					
 					return;
 				}
-			//	next = a.ryuIdle;
 				
 //				if(pressed.contains(KeyEvent.VK_ESCAPE)) {
 //					dispose();
@@ -69,22 +70,21 @@ public class StreetFighter extends JFrame {
 					a.current.reset();
 					a.current = map.get(key);
 					a.current.start();
+					
 				}
-				
 			}
 			public synchronized void keyReleased(KeyEvent e) {
 				int key = e.getKeyCode();
-				pressed.remove(new Integer(key));
 				
-				
-				
+				if(pressed.remove(new Integer(key))&&cancellable) {
+					a.current.reset();
+				}
 				
 			}
 			public void keyTyped(KeyEvent arg0) {
 
 			}
 		});
-		
 		MutableInt frames = new MutableInt(0);
 		Screen s = new Screen(a, frames);
 		this.add(s);
@@ -115,8 +115,6 @@ public class StreetFighter extends JFrame {
 		long last_time = System.currentTimeMillis();
 		long target_time = last_time + targetMillis;
 
-//		a.current.start();
-
 		while(true) {
 			long current = System.currentTimeMillis();
 			if(current>=target_time) {
@@ -131,6 +129,11 @@ public class StreetFighter extends JFrame {
 					a.current.start();
 				}
 				cancellable = a.current.update(a.getX(), a.getY());
+				
+				for(Integer i : pressed) {
+					System.out.print(i);
+				}
+				System.out.println();
 				
 				s.repaint();
 				frames.setInt(frames.getInt()+1);

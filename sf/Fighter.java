@@ -66,6 +66,7 @@ public class Fighter {
 		g.drawImage(current.getSprite(), x.getInt(), y.getInt()-current.getSprite().getHeight(), null);
 		
 	}
+	
 	public MutableInt getX() {
 		return x;
 	}
