@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class Sprite {
-	private ArrayList<Rectangle> box;
+	private ArrayList<Rectangle> box = new ArrayList<Rectangle>();
 	private int dx;
 	private int dy;
 	private int x;
@@ -22,6 +22,8 @@ public class Sprite {
 	public Sprite( int x, int y, int x1, int y1, int dx, int dy, SpriteSheet s) {
 		w = x1 - x + 1;
 		h = y1 - y + 1;
+		dx = dx;
+		dy = dy;
 		img = s.getSprite(x, y, w, h, 4);		
 	}
 	public BufferedImage getSprite() {

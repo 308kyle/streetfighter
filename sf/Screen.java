@@ -30,10 +30,7 @@ public class Screen extends JPanel {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		one.draw(g, frames.getInt());
-
 		st.draw(g);
-
+		one.draw(g, frames.getInt());
 	}
 }
