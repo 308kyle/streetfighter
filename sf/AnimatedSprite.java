@@ -6,7 +6,7 @@ import java.util.List;
 
 public class AnimatedSprite {
 
-	private ArrayList<BufferedImage> animation = new ArrayList<BufferedImage>();
+	private Sprite[] animation;
 	private int currentFrame = 0;
 	private int lastFrame = 0;
 	private int frameCount = 0;
@@ -22,24 +22,16 @@ public class AnimatedSprite {
 	private int[] deltax;
 	private int[] deltay;
 
-	public AnimatedSprite(SpriteSheet s, int frameDelay, int frameDuration, boolean repeat, boolean cancel, int[] deltax, int[] deltay, int[][] coords) {
-		for(int i=0;i<coords.length;i++) {
-			addSprite(s.getSprite(coords[i][0], coords[i][1], coords[i][2], coords[i][3], 4));
-		}
+	public AnimatedSprite(int frameDelay, int frameDuration, boolean repeat, boolean cancel, Sprite[] a) {
+		animation = a;
 
 		this.frameDelay = frameDelay;
 		this.frameDuration = frameDuration;
 		this.repeat = repeat;
 		this.cancel = cancel;
-
-		this.deltax = deltax;
-		this.deltay = deltay;
-
-		length = animation.size();
+		
+		length = animation.length;
 		stop = true;
-	}
-	private void addSprite(BufferedImage i) {
-		animation.add(i);
 	}
 	public void start() {
 		stop = false;
@@ -66,7 +58,7 @@ public class AnimatedSprite {
 				
 				currentFrame = (frameCount-frameDelay)/framespersprite;
 				
-				if(currentFrame == animation.size()) {
+				if(currentFrame == animation.length) {
 					if(!repeat) {
 						this.reset();
 						return true;
@@ -95,8 +87,8 @@ public class AnimatedSprite {
 	}
 	public BufferedImage getSprite() {
 		if(!reverse)
-			return animation.get(currentFrame);
-		return animation.get(animation.size()-1-currentFrame);
+			return animation[currentFrame].getSprite();
+		return animation[animation.length-1-currentFrame].getSprite();
 	}
 	
 }
