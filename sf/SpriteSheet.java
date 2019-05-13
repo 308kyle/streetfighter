@@ -1,6 +1,7 @@
 package sf;
 
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -34,5 +35,26 @@ public class SpriteSheet {
         g2d.drawImage(sprite, 0, 0, (int)scaledWidth, (int)scaledHeight, null);
         g2d.dispose();
 		return outputImage;
+	}
+	public static BufferedImage MirrorImage(BufferedImage image) {
+		
+		BufferedImage mirrored = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+
+	    Graphics2D graphics = (Graphics2D)mirrored.getGraphics();
+	    AffineTransform transform = new AffineTransform();
+	    transform.setToScale(-1, 1);
+	    transform.translate(-image.getWidth(), 0);
+	    graphics.setTransform(transform);
+	    graphics.drawImage(image, 0, 0, null);
+
+//	    try {
+//			ImageIO.write(mirrored, "jpg", new File("test-flipped.jpg"));
+//		} catch (IOException e) {
+//	
+//			e.printStackTrace();
+//		}
+	    
+	    return  mirrored;
+	    
 	}
 }
