@@ -27,11 +27,20 @@ public class Sprite {
 	public BufferedImage getSprite() {
 		return img;
 	}
+	public void setX(int newx) {
+		x = newx;
+	}
+	public void setY(int newy) {
+		y = newy;
+	}
 	public int dx() {
 		return dx;
 	}
 	public int dy() {
 		return dy;
+	}
+	public void addBox(Rectangle b) {
+		box.add(b);
 	}
 	public void createBox() {
 		box.add(new Rectangle(w, h));
