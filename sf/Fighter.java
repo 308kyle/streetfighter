@@ -53,9 +53,11 @@ public class Fighter {
 		if(filename.equals("ryu good transparent.png")) {
 			
 		}
+
 		x = new MutableInt(100);
 		y = new MutableInt(600);
 		
+
 		current = ryuIdle;
 		
 	}
@@ -63,8 +65,10 @@ public class Fighter {
 		return s;
 	}
 	public void draw(Graphics g, int frames) {
+
 		g.drawImage(current.getSprite(), x.getInt(), y.getInt()-current.getSprite().getHeight(), null);
 		
+
 	}
 	
 	public MutableInt getX() {

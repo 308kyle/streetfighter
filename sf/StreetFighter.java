@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 
 public class StreetFighter extends JFrame {
 	Fighter a = new Fighter("ryu transparent.png");
+
 	
 //	Queue<Integer> inputs = new LinkedList<Integer>();
 	ArrayList<Integer> pressed = new ArrayList<Integer>();
@@ -25,7 +26,7 @@ public class StreetFighter extends JFrame {
 	AnimatedSprite next;
 	
 	boolean cancellable;
-	boolean change;
+
 	
 	public StreetFighter() {
 		super("Street Fighter");
@@ -41,6 +42,7 @@ public class StreetFighter extends JFrame {
 			public synchronized void keyPressed(KeyEvent e) {
 		
 				int key = e.getKeyCode();
+
 				if(!pressed.contains(new Integer(key))) {
 					pressed.add(key);
 				}
@@ -49,6 +51,7 @@ public class StreetFighter extends JFrame {
 					
 					return;
 				}
+
 				
 //				if(pressed.contains(KeyEvent.VK_ESCAPE)) {
 //					dispose();
@@ -72,14 +75,16 @@ public class StreetFighter extends JFrame {
 					a.current.start();
 					
 				}
+
 			}
 			public synchronized void keyReleased(KeyEvent e) {
 				int key = e.getKeyCode();
 				
 				if(pressed.remove(new Integer(key))&&cancellable) {
 					a.current.reset();
+
 				}
-				
+
 			}
 			public void keyTyped(KeyEvent arg0) {
 
@@ -107,9 +112,10 @@ public class StreetFighter extends JFrame {
 		} else {
 			a.current = a.ryuIdle;
 		}
-	}
-	
+	}	
+
 	public void gameLoop(Screen s, MutableInt frames) {
+
 		final int fps = 60;
 		final int targetMillis = 1000/fps;
 		long last_time = System.currentTimeMillis();
