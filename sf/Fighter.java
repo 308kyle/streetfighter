@@ -27,6 +27,10 @@ public class Fighter {
 	AnimatedSprite ryuCBlock;
 	AnimatedSprite ryuCrouch;
 
+	AnimatedSprite ryuCKick;
+	AnimatedSprite ryuJKick;
+
+
 	AnimatedSprite ryuIdleR;
 	AnimatedSprite ryuWalkLR;
 	AnimatedSprite ryuWalkR;
@@ -45,6 +49,10 @@ public class Fighter {
 	AnimatedSprite ryuCBlockR;
 	AnimatedSprite ryuCrouchR;
 
+	AnimatedSprite ryuCKickR;
+	AnimatedSprite ryuJKickR;
+
+
 	private MutableInt x;
 	private MutableInt y;
 
@@ -56,6 +64,7 @@ public class Fighter {
 
 	public Fighter(boolean human, int x2, int y2) {
 		
+
 		this.human = human;
 
 		Sprite i1 = new Sprite(6, 18, 6+43-1, 18+81-1, 0, 0, s);
@@ -67,10 +76,12 @@ public class Fighter {
 		i3.createBox();
 		i4.createBox();
 
+
 		
 		ryuIdle = new AnimatedSprite(0, 60, true, true, new Sprite[] {i1,i2,i3,i4});
 		ryuIdleR = new AnimatedSprite(0, 60, true, true, Sprite.clones(new Sprite[] {i1,i2,i3,i4}));
 
+	
 
 		Sprite w1 = new Sprite(205, 24, 205+43-1, 24+75-1, 5, 0, s);
 		Sprite w2 = new Sprite(252, 19, 252+43-1, 19+80-1, 5, 0, s);
@@ -91,6 +102,7 @@ public class Fighter {
 		ryuWalkL.reverse();
 		ryuWalkLR.reverse();
 		
+    
 		Sprite p11 = new Sprite(3, 134, 3+43-1, 134+81-1, 0, 0, s);
 		Sprite p12 = new Sprite(52, 134, 52+57-1, 134+81-1, 0, 0, s);
 		p12.addBox(new Rectangle(30, 10, 31+1, 14+1));
@@ -100,6 +112,7 @@ public class Fighter {
 		p13.createBox();
 		ryuPunch = new AnimatedSprite(2, 15, false, false, new Sprite[] {p11, p12, p13});
 		ryuPunchR = new AnimatedSprite(2, 15, false, false, Sprite.clones(new Sprite[] {p11, p12, p13}));
+
 
 		Sprite p21 = new Sprite(170, 134, 170+43-1, 134+81-1, 0, 0, s);
 		Sprite p22 = new Sprite(218, 130, 218+51-1, 130+85-1, 0, 0, s);
@@ -123,6 +136,8 @@ public class Fighter {
 		Sprite j5 = new Sprite(619, 17, 619+29-1, 17+78-1, 0, 16, s);
 		Sprite j6 = new Sprite(656, 9, 656+33-1, 9+90-1, 0, 20, s);
 		Sprite j7 = new Sprite(696, 24, 696+43-1, 24+75-1, 0, 0, s);
+
+
 		j1.createBox();
 		j2.createBox();
 		j3.createBox();
@@ -132,6 +147,7 @@ public class Fighter {
 		j7.createBox();
 		ryuJump = new AnimatedSprite(5, 60, false, false, new Sprite[] {j1, j2, j3, j4, j5, j6, j7});
 		ryuJumpR = new AnimatedSprite(5, 60, false, false, Sprite.clones(new Sprite[] {j1, j2, j3, j4, j5, j6, j7}));
+
 
 		Sprite h1 = new Sprite(5, 760, 5+44-1, 760+77-1, 0, 0, s);
 		Sprite h2 = new Sprite(53, 761, 53+48-1, 761+76-1, 0, 0, s);
@@ -205,8 +221,16 @@ public class Fighter {
 		ryuCrouch = new AnimatedSprite(0, 56, true, true, new Sprite[] {c1});
 		ryuCrouchR = new AnimatedSprite(0, 56, true, true, Sprite.clones(new Sprite[] {c1}));
 
-		
+		Sprite ck1 = new Sprite(660, 418, 660+50-1, 418+57-1, 0, 0, s);
+		Sprite ck2 = new Sprite(714, 417, 714+72-1, 417+58-1, 0, 0, s);
+		ryuCKick = new AnimatedSprite(0, 15, false, false, new Sprite[] {ck1, ck2, ck1});
+		ryuCKickR = new AnimatedSprite(0, 15, false, false, Sprite.mirror(new Sprite[] {ck1, ck2, ck1}));
 
+		Sprite Jk1 = new Sprite(468, 551, 468+38-1, 551+64-1, 0, 0, s);
+		Sprite Jk2 = new Sprite(510, 554, 510+64-1, 554+55-1, 0, 0, s);
+		ryuJKick = new AnimatedSprite(0, 28, false, false, new Sprite[] {Jk1, Jk2, Jk1});
+		ryuJKickR = new AnimatedSprite(0, 28, false, false, Sprite.mirror(new Sprite[] {Jk1, Jk2, Jk1}));
+		
 
 		x = new MutableInt(x2);
 		y = new MutableInt(y2);
@@ -220,6 +244,7 @@ public class Fighter {
 	public int gethp() {
 		return hp;
 	}
+
 
 	public void draw(Graphics g) {
 		if(direction==1) {
@@ -242,6 +267,7 @@ public class Fighter {
 	public MutableInt getY() {
 		return y;
 	}
+
 	public void setX(int a) {
 		x.setInt(a);
 	}
