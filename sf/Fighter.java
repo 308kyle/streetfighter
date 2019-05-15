@@ -24,6 +24,8 @@ public class Fighter {
 	AnimatedSprite ryuCBlock;
 	AnimatedSprite ryuCrouch;
 	
+	
+	
 	private MutableInt x;
 	private MutableInt y;
 	
@@ -33,7 +35,7 @@ public class Fighter {
 	
 	private int hp = 100;
 	
-	public Fighter(boolean human) {
+	public Fighter(boolean human, int x2, int y2) {
 		this.human = human;
 		
 		Sprite i1 = new Sprite(6, 18, 6+43-1, 18+81-1, 0, 0, s);
@@ -127,8 +129,8 @@ public class Fighter {
 		
 		
 
-		x = new MutableInt(100);
-		y = new MutableInt(800);
+		x = new MutableInt(x2);
+		y = new MutableInt(y2);
 		
 		current = ryuIdle;
 		
@@ -137,7 +139,7 @@ public class Fighter {
 		return s;
 	}
 	
-	public void draw(Graphics g, int frames) {
+	public void draw(Graphics g) {
 
 		g.drawImage(current.getSprite(), x.getInt(), y.getInt()-current.getSprite().getHeight(), null);
 
