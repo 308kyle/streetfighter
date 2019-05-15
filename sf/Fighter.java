@@ -70,13 +70,13 @@ public class Fighter {
 		Sprite h2 = new Sprite(53, 761, 53+48-1, 761+76-1, 0, 0, s);
 		Sprite h3 = new Sprite(106, 771, 106+50-1, 771+66-1, 0, 0, s);
 		Sprite h4 = new Sprite(163, 754, 163+44-1, 754+83-1, 0, 0, s);
-		ryuHit = new AnimatedSprite(0, 28, false, false, new Sprite[] {h1, h2, h3, h4});
+		ryuHit = new AnimatedSprite(0, 28, false, true, new Sprite[] {h1, h2, h3, h4});
 		
 		Sprite had1 = new Sprite(4, 636, 5+4-1, 636+83-1, 0, 0, s);
 		Sprite had2 = new Sprite(60, 642, 60+67-1, 642+77-1, 0, 0, s);
 		Sprite had3 = new Sprite(131, 643, 131+67-1, 643+76-1, 0, 0, s);
 		Sprite had4 = new Sprite(202, 648, 202+92-1, 648+71-1, 0, 0, s);
-		Sprite had5 = new Sprite(299, 648, 299+71-1, 548+71-1, 0, 0, s);
+		Sprite had5 = new Sprite(299, 648, 299+71-1, 648+71-1, 0, 0, s);
 		ryuHad = new AnimatedSprite(5, 35, false, false, new Sprite[] {had1, had2, had3, had4, had5});
 		
 		Sprite fh1 = new Sprite(217, 757, 217+49-1, 757+80-1, 0, 0, s);
