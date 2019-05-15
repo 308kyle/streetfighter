@@ -17,7 +17,7 @@ public class Sprite {
 	private int w;
 	private int h;
 	private BufferedImage img;
-	public Sprite( int x, int y, int x1, int y1, int dx, int dy, SpriteSheet s) {
+	public Sprite(int x, int y, int x1, int y1, int dx, int dy, SpriteSheet s) {
 		w = x1 - x + 1;
 		h = y1 - y + 1;
 		this.dx = dx;
@@ -27,7 +27,17 @@ public class Sprite {
 	public BufferedImage getSprite() {
 		return img;
 	}
-
+	public void setSprite(BufferedImage b) {
+		img = b;
+	}
+	public static Sprite[] mirror(Sprite[] a) {
+		Sprite[] copy = a.clone();
+		for(int i=0;i<a.length;i++) {
+			copy[i].setSprite(SpriteSheet.MirrorImage(a[i].getSprite()));
+		}
+		return copy;
+	}
+	
 	public int dx() {
 		return dx;
 	}
