@@ -24,7 +24,22 @@ public class Fighter {
 	AnimatedSprite ryuCBlock;
 	AnimatedSprite ryuCrouch;
 	
-	
+	AnimatedSprite ryuIdleR;
+	AnimatedSprite ryuWalkR;
+	AnimatedSprite ryuPunchR;
+	AnimatedSprite ryuPunch2R;
+	AnimatedSprite ryuJumpR;
+	AnimatedSprite ryuHitR;
+	AnimatedSprite ryuHadR;
+	AnimatedSprite hadoukenR;
+	AnimatedSprite ryuKOR;
+	AnimatedSprite ryuV1R;
+	AnimatedSprite ryuFHitR;
+	AnimatedSprite ryuKnockR;
+	AnimatedSprite currentR;
+	AnimatedSprite ryuBlockR;
+	AnimatedSprite ryuCBlockR;
+	AnimatedSprite ryuCrouchR;
 	
 	private MutableInt x;
 	private MutableInt y;
@@ -42,8 +57,10 @@ public class Fighter {
 		Sprite i2 = new Sprite(55, 19, 55+43-1, 19+80-1, 0, 0, s);
 		Sprite i3 = new Sprite(105, 18, 105+43-1, 18+81-1, 0, 0, s);
 		Sprite i4 = new Sprite(154, 17, 154+43-1, 17+82-1, 0, 0, s);
-		ryuIdle = new AnimatedSprite(0, 60, true, true, new Sprite[] {i1, i2, i3, i4});
-		
+		Sprite[] l = {i1,i2,i3,i4};
+		ryuIdle = new AnimatedSprite(0, 60, true, true, l);
+		ryuIdle = new AnimatedSprite(0, 60, true, true, l.clone());
+
 		Sprite w1 = new Sprite(205, 24, 205+43-1, 24+75-1, 5, 0, s);
 		Sprite w2 = new Sprite(252, 19, 252+43-1, 19+80-1, 5, 0, s);
 		Sprite w3 = new Sprite(301, 18, 301+43-1, 18+81-1, 5, 0, s);
@@ -115,8 +132,6 @@ public class Fighter {
 		Sprite k8 = new Sprite(949, 742, 949+42-1, 742+95-1, 0, 0, s);
 		ryuKnock = new AnimatedSprite(0, 56, false, false, new Sprite[] {k1, k2, k3, k4, k5, k6, k7, k8});
 
-		
-
 		Sprite b1 = new Sprite(1211, 16, 1211+44-1, 16+84-1, 0, 0, s);
 		ryuBlock = new AnimatedSprite(0, 40, false, false, new Sprite[] {b1});
 		
@@ -127,8 +142,7 @@ public class Fighter {
 		ryuCrouch = new AnimatedSprite(0, 56, true, true, new Sprite[] {c1});
 	
 		
-		
-
+	
 		x = new MutableInt(x2);
 		y = new MutableInt(y2);
 		

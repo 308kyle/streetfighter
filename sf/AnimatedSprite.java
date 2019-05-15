@@ -30,11 +30,20 @@ public class AnimatedSprite {
 		length = animation.length;
 		stop = true;
 	}
+	public void flip() {
+		for(int i=0;i<animation.length;i++) {
+			animation[i].setSprite(SpriteSheet.MirrorImage(animation[i].getSprite()));
+		}
+	}
+	
 	public void start() {
 		stop = false;
 	}
 	public boolean stopped() {
 		return stop;
+	}
+	public Sprite[] sprites() {
+		return animation;
 	}
 	public int getDuration() {
 		return frameDuration;
