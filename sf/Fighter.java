@@ -38,11 +38,11 @@ public class Fighter {
 		Sprite i4 = new Sprite(154, 17, 154+43-1, 17+82-1, 0, 0, s);
 		ryuIdle = new AnimatedSprite(0, 60, true, true, new Sprite[] {i1, i2, i3, i4});
 		
-		Sprite w1 = new Sprite(205, 24, 205+43-1, 24+75-1, 0, 0, s);
-		Sprite w2 = new Sprite(252, 19, 252+43-1, 19+80-1, 0, 0, s);
-		Sprite w3 = new Sprite(301, 18, 301+43-1, 18+81-1, 0, 0, s);
-		Sprite w4 = new Sprite(351, 19, 351+43-1, 19+80-1, 0, 0, s);
-		Sprite w5 = new Sprite(401, 19, 401+43-1, 19+80-1, 0, 0, s);
+		Sprite w1 = new Sprite(205, 24, 205+43-1, 24+75-1, 5, 0, s);
+		Sprite w2 = new Sprite(252, 19, 252+43-1, 19+80-1, 5, 0, s);
+		Sprite w3 = new Sprite(301, 18, 301+43-1, 18+81-1, 5, 0, s);
+		Sprite w4 = new Sprite(351, 19, 351+43-1, 19+80-1, 5, 0, s);
+		Sprite w5 = new Sprite(401, 19, 401+43-1, 19+80-1, 5, 0, s);
 		ryuWalk = new AnimatedSprite(0, 60, true, true, new Sprite[] {w1, w2, w3, w4, w5});
 		
 		Sprite p11 = new Sprite(3, 134, 3+43-1, 134+81-1, 0, 0, s);
@@ -59,13 +59,13 @@ public class Fighter {
 		Sprite p25 = new Sprite(411, 134, 411+43-1, 134+81-1, 0, 0, s);
 		ryuPunch2 = new AnimatedSprite(5, 35, false, false, new Sprite[] {p21, p22, p23, p24, p25});
 		
-		Sprite j1 = new Sprite(452, 24, 452+43-1, 452+75-1, 0, 0, s);
-		Sprite j2 = new Sprite(503, 9, 503+33-1, 503+90-1, 0, 0, s);
-		Sprite j3 = new Sprite(545, 17, 545+29-1, 545+78-1, 0, 0, s);
+		Sprite j1 = new Sprite(452, 24, 452+43-1, 452+75-1, 0, -4, s);
+		Sprite j2 = new Sprite(503, 9, 503+33-1, 503+90-1, 0, -4, s);
+		Sprite j3 = new Sprite(545, 17, 545+29-1, 545+78-1, 0, -4, s);
 		Sprite j4 = new Sprite(582, 19, 582+31-1, 582+67-1, 0, 0, s);
-		Sprite j5 = new Sprite(619, 17, 619+29-1, 619+78-1, 0, 0, s);
-		Sprite j6 = new Sprite(656, 9, 656+33-1, 656+90-1, 0, 0, s);
-		Sprite j7 = new Sprite(696, 24, 696+43-1, 696+75-1, 0, 0, s);
+		Sprite j5 = new Sprite(619, 17, 619+29-1, 619+78-1, 0, 4, s);
+		Sprite j6 = new Sprite(656, 9, 656+33-1, 656+90-1, 0, 4, s);
+		Sprite j7 = new Sprite(696, 24, 696+43-1, 696+75-1, 0, 4, s);
 		ryuJump = new AnimatedSprite(5, 49, false, false, new Sprite[] {j1, j2, j3, j4, j5, j6, j7});
 		
 		Sprite h1 = new Sprite(5, 760, 5+44-1, 760+77-1, 0, 0, s);
