@@ -1,5 +1,7 @@
 package sf;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -140,7 +142,13 @@ public class Fighter {
 	public void draw(Graphics g, int frames) {
 
 		g.drawImage(current.getSprite(), x.getInt(), y.getInt()-current.getSprite().getHeight(), null);
-
+		g.setFont(new Font( "", Font.BOLD, 36));
+		g.setColor(Color.RED);
+		if(human) {
+			g.drawString("You", x.getInt()+50, y.getInt()-current.getSprite().getHeight()-10);
+		}else {
+			g.drawString("CPU", x.getInt()+50, y.getInt()-current.getSprite().getHeight()-10);
+		}
 	}
 	
 	public MutableInt getX() {
