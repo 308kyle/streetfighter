@@ -59,10 +59,9 @@ public class AnimatedSprite {
 				currentFrame = (frameCount-frameDelay)/framespersprite;
 				
 				if(currentFrame == animation.length) {
-					System.out.println(currentFrame);
-					System.out.println(animation.length);
+					
 					if(!repeat) {
-						System.out.println("repeat");
+						
 						this.reset();
 						return true;
 					}

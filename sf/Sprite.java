@@ -12,10 +12,8 @@ public class Sprite {
 	private ArrayList<Rectangle> box = new ArrayList<Rectangle>();
 	private int dx;
 	private int dy;
-	private int x;
-	private int y;
-	private int x1;
-	private int y1;
+	
+
 	private int w;
 	private int h;
 	private BufferedImage img;
@@ -29,12 +27,7 @@ public class Sprite {
 	public BufferedImage getSprite() {
 		return img;
 	}
-	public void setX(int newx) {
-		x = newx;
-	}
-	public void setY(int newy) {
-		y = newy;
-	}
+
 	public int dx() {
 		return dx;
 	}
