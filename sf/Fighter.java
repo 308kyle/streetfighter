@@ -26,6 +26,7 @@ public class Fighter {
 	AnimatedSprite ryuCBlock;
 	AnimatedSprite ryuCrouch;
 	AnimatedSprite ryuCKick;
+	AnimatedSprite ryuJKick;
 
 	AnimatedSprite ryuIdleR;
 	AnimatedSprite ryuWalkR;
@@ -44,6 +45,7 @@ public class Fighter {
 	AnimatedSprite ryuCBlockR;
 	AnimatedSprite ryuCrouchR;
 	AnimatedSprite ryuCKickR;
+	AnimatedSprite ryuJKickR;
 
 	private MutableInt x;
 	private MutableInt y;
@@ -206,6 +208,10 @@ public class Fighter {
 		Sprite ck2 = new Sprite(714, 417, 714+72-1, 417+58-1, 0, 0, s);
 		ryuCKick = new AnimatedSprite(0, 56, true, true, new Sprite[] {ck1, ck2, ck1});
 
+		Sprite Jk1 = new Sprite(468, 551, 468+38-1, 551+64-1, 0, 0, s);
+		Sprite Jk2 = new Sprite(510, 554, 510+64-1, 554+55-1, 0, 0, s);
+		ryuJKick = new AnimatedSprite(0, 56, true, true, new Sprite[] {Jk1, Jk2, Jk1});
+		
 		x = new MutableInt(x2);
 		y = new MutableInt(y2);
 
