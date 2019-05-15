@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class Sprite {
-	private ArrayList<Rectangle> box = new ArrayList<Rectangle>();
+	public ArrayList<Rectangle> box = new ArrayList<Rectangle>();
 	private int dx;
 	private int dy;
 	

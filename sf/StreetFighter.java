@@ -116,6 +116,24 @@ public class StreetFighter extends JFrame {
 			}
 		}.start();
 	}
+	public void collisions() {
+		AnimatedSprite ac = a.current;
+		AnimatedSprite bc = b.current;
+		if(ac!= a.ryuIdle) {
+			if(ac.getSSprite().box.get(0).intersects(bc.getSSprite().box.get(0))) {
+				if(ac!=a.ryuWalk) {
+					b.sethp(b.gethp()-10);
+				}
+			}
+		}
+		if(bc!= b.ryuIdle) {
+			if(ac.getSSprite().box.get(0).intersects(bc.getSSprite().box.get(0))) {
+				if(bc!=b.ryuWalk) {
+					a.sethp(a.gethp()-10);
+				}
+			}
+		}
+	}
 	public void move() {
 		if(b.current.stopped()) {
 			if(a.getDirection()==-1) {

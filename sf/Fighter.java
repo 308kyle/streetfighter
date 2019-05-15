@@ -44,7 +44,6 @@ public class Fighter {
 	AnimatedSprite ryuV1R;
 	AnimatedSprite ryuFHitR;
 	AnimatedSprite ryuKnockR;
-	AnimatedSprite currentR;
 	AnimatedSprite ryuBlockR;
 	AnimatedSprite ryuCBlockR;
 	AnimatedSprite ryuCrouchR;
@@ -105,7 +104,7 @@ public class Fighter {
     
 		Sprite p11 = new Sprite(3, 134, 3+43-1, 134+81-1, 0, 0, s);
 		Sprite p12 = new Sprite(52, 134, 52+57-1, 134+81-1, 0, 0, s);
-		p12.addBox(new Rectangle(30, 10, 31+1, 14+1));
+		//p12.addBox(new Rectangle(30, 10, 31+1, 14+1));
 		Sprite p13 = new Sprite(117, 134, 117+43-1, 134+81-1, 0, 0, s);
 		p11.createBox();
 		p12.createBox();
@@ -117,7 +116,7 @@ public class Fighter {
 		Sprite p21 = new Sprite(170, 134, 170+43-1, 134+81-1, 0, 0, s);
 		Sprite p22 = new Sprite(218, 130, 218+51-1, 130+85-1, 0, 0, s);
 		Sprite p23 = new Sprite(274, 130, 274+72-1, 130+85-1, 0, 0, s);
-		p23.addBox(new Rectangle(41, 12, 35+1, 14+1));
+		//p23.addBox(new Rectangle(41, 12, 35+1, 14+1));
 		Sprite p24 = new Sprite(353, 130, 353+51-1, 130+85-1, 0, 0, s);
 		Sprite p25 = new Sprite(411, 134, 411+43-1, 134+81-1, 0, 0, s);
 		p25.createBox();
@@ -238,13 +237,16 @@ public class Fighter {
 		current = ryuIdle;
 
 	}
+	
 	public SpriteSheet getSheet() {
 		return s;
 	}
 	public int gethp() {
 		return hp;
 	}
-
+	public void sethp(int newhp) {
+		hp = newhp;
+	}
 
 	public void draw(Graphics g) {
 		if(direction==1) {
