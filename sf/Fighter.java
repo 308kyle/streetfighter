@@ -206,7 +206,7 @@ public class Fighter {
 		Sprite Jk1 = new Sprite(468, 551, 468+38-1, 551+64-1, 0, 0, s);
 		Sprite Jk2 = new Sprite(510, 554, 510+64-1, 554+55-1, 0, 0, s);
 		ryuJKick = new AnimatedSprite(0, 28, false, false, new Sprite[] {Jk1, Jk2, Jk1});
-		ryuJKick = new AnimatedSprite(0, 28, false, false, Sprite.mirror(new Sprite[] {Jk1, Jk2, Jk1}));
+		ryuJKickR = new AnimatedSprite(0, 28, false, false, Sprite.mirror(new Sprite[] {Jk1, Jk2, Jk1}));
 		
 		x = new MutableInt(x2);
 		y = new MutableInt(y2);
