@@ -46,15 +46,18 @@ public class Screen extends JPanel {
 		
 		g.setFont(new Font("Times New Roman", Font.BOLD, 36));
 		g.setColor(Color.yellow);
-		g.drawString(""+timer.getInt(), (d.width/2)-25, 50);
+		g.drawString(""+timer.getInt(), (d.width/2)-25, 90);
 		
 
+		g.setColor(Color.MAGENTA);
+		g.drawString("Player", 53, 30);
+		g.drawString("CPU", 1550-73, 30);
 		
 		g.setColor(Color.GREEN);
-		g.drawRect(100, 10, 600, 50);
-		g.drawRect(1000, 10, 600, 50);
-		g.fillRect(100, 10, (int)600*one.gethp()/100, 50);
-		g.fillRect(1600-(int)(600*one.gethp()/100), 10, (int)(600*one.gethp()/100), 50);
+		g.drawRect(50, 50, 600, 50);
+		g.drawRect(950, 50, 600, 50);
+		g.fillRect(50, 50, (int)600*one.gethp()/100, 50);
+		g.fillRect(1550-(int)(600*one.gethp()/100), 50, (int)(600*one.gethp()/100), 50);
 		
 		
 
