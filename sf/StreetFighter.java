@@ -117,12 +117,11 @@ public class StreetFighter extends JFrame {
 				
 				if(a.current.stopped()) {
 					a.current = a.ryuIdle;
+					a.current.start();
 				}
 				cancellable = a.current.update(a.getX(), a.getY());
 				
-				if(cancellable) {
-					a.current.start();
-				}
+				
 				
 				s.repaint();
 				frames.setInt(frames.getInt()+1);
