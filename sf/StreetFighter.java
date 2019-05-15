@@ -14,61 +14,67 @@ import java.util.Set;
 import javax.swing.JFrame;
 
 public class StreetFighter extends JFrame {
-	Fighter a = new Fighter(true,100,800);
+	Fighter a = new Fighter(true,300,800);
 	Fighter b = new Fighter(false,800,800);
-	
-//	Queue<Integer> inputs = new LinkedList<Integer>();
+
+	//	Queue<Integer> inputs = new LinkedList<Integer>();
 	ArrayList<Integer> pressed = new ArrayList<Integer>();
 	ArrayList<Integer> ai = new ArrayList<Integer>();
 	Map<Integer, AnimatedSprite> map = new HashMap<Integer, AnimatedSprite>();
 	Map<Integer, AnimatedSprite> mapR = new HashMap<Integer, AnimatedSprite>();
-//	Set<Integer> pressed = new HashSet<Integer>();
-	
-	MutableInt timer = new MutableInt(99);
-	
-	boolean cancellable;
+	//	Set<Integer> pressed = new HashSet<Integer>();
 
+	MutableInt timer = new MutableInt(99);
+
+	int frameCount = 0;
+
+	boolean cancellable;
+	boolean cancellable2;
+	
 	public StreetFighter() {
 		super("Street Fighter");
 
-		map.put(KeyEvent.VK_LEFT, a.ryuWalk);
-		//map.put(KeyEvent.VK_DOWN, a.ryuWalk);
+		map.put(KeyEvent.VK_LEFT, a.ryuWalkL);
 		map.put(KeyEvent.VK_RIGHT, a.ryuWalk);
-		map.put(KeyEvent.VK_W, a.ryuJump);
-		map.put(KeyEvent.VK_A, a.ryuWalk);
-		map.put(KeyEvent.VK_S, a.ryuCrouch);
-		map.put(KeyEvent.VK_D, a.ryuWalk);
-		map.put(KeyEvent.VK_J, a.ryuPunch);
-		map.put(KeyEvent.VK_K, a.ryuPunch2);
-		map.put(KeyEvent.VK_L, a.ryuBlock);
-		
-		
-		mapR.put(KeyEvent.VK_LEFT, a.ryuWalkR);
-		//map.put(KeyEvent.VK_DOWN, a.ryuWalk);
+		map.put(KeyEvent.VK_UP, a.ryuJump);
+		map.put(KeyEvent.VK_DOWN, a.ryuCrouch);
+		map.put(KeyEvent.VK_A, a.ryuPunch);
+		map.put(KeyEvent.VK_S, a.ryuPunch2);
+		map.put(KeyEvent.VK_D, a.ryuBlock);
+
+
+		mapR.put(KeyEvent.VK_LEFT, a.ryuWalkLR);
 		mapR.put(KeyEvent.VK_RIGHT, a.ryuWalkR);
-		mapR.put(KeyEvent.VK_W, a.ryuJumpR);
-		mapR.put(KeyEvent.VK_A, a.ryuWalkR);
-		mapR.put(KeyEvent.VK_S, a.ryuCrouchR);
-		mapR.put(KeyEvent.VK_D, a.ryuWalkR);
-		mapR.put(KeyEvent.VK_J, a.ryuPunchR);
-		mapR.put(KeyEvent.VK_K, a.ryuPunch2R);
-		mapR.put(KeyEvent.VK_L, a.ryuBlockR);
-		
+		mapR.put(KeyEvent.VK_UP, a.ryuJumpR);
+		mapR.put(KeyEvent.VK_DOWN, a.ryuCrouchR);
+		mapR.put(KeyEvent.VK_A, a.ryuPunchR);
+		mapR.put(KeyEvent.VK_S, a.ryuPunch2R);
+		mapR.put(KeyEvent.VK_D, a.ryuBlockR);
+
 		this.addKeyListener(new KeyListener() {	
 			public synchronized void keyPressed(KeyEvent e) {
-		
+
 				int key = e.getKeyCode();
 
 				if(!pressed.contains(new Integer(key))) {
 					pressed.add(key);
 				}
 				if(pressed.size()>1) {
-								
-					return;
+					for(int i=pressed.size()-1;i>0;i--) {
+						if(pressed.get(i)==KeyEvent.VK_A) {
+							if(pressed.get(i-1)==KeyEvent.VK_DOWN) {
+
+							}
+						}
+					}
 				}
-				
+
 				if(map.get(key)!=null && cancellable) {
-					a.current = mapR.get(key);
+					if(a.getDirection()==1) {
+						a.current = map.get(key);
+					} else {
+						a.current = mapR.get(key);
+					}
 					a.current.start();
 				}
 				if(key == KeyEvent.VK_R && timer.getInt()==0) {
@@ -78,7 +84,7 @@ public class StreetFighter extends JFrame {
 			}
 			public synchronized void keyReleased(KeyEvent e) {
 				int key = e.getKeyCode();
-				
+
 				if(pressed.remove(new Integer(key))&&cancellable) {
 					a.current.reset();
 				}
@@ -94,14 +100,30 @@ public class StreetFighter extends JFrame {
 		this.setUndecorated(true);
 		this.pack();
 		this.setVisible(true);
-		
+
 		new Thread() {
 			public void run() {
 				gameLoop(s, frames);
 			}
 		}.start();
 	}
+	public void move() {
+		
+		if(timer.getInt()<97) {
+			if(a.getX().getInt()-b.getX().getInt()<50) {
+				b.current = b.ryuWalkLR;
+			} else if(a.getX().getInt()-b.getX().getInt()>50) {
+				b.current = b.ryuWalk;
+			}
+			System.out.println("started");
+			System.out.println(b.getX().getInt());
+			b.current.start();
 
+		} else {
+			b.current = b.ryuIdleR;
+			b.current.start();
+		}
+	}
 	public void gameLoop(Screen s, MutableInt frames) {
 
 		final int fps = 60;
@@ -118,14 +140,20 @@ public class StreetFighter extends JFrame {
 				}
 				last_time = current;
 				target_time = target_time + targetMillis;
-				
-				
-				if(a.current.stopped()) {
+
+				if(a.current.stopped()&&a.getDirection()==1) {
 					a.current = a.ryuIdle;
 					a.current.start();
+				} else if(a.current.stopped()&&a.getDirection()==-1) {
+					a.current = a.ryuIdleR;
+					a.current.start();
 				}
+
 				cancellable = a.current.update(a.getX(), a.getY());
+				cancellable2 = b.current.update(b.getX(), b.getY());
 				
+				a.setDirection(b.getX().getInt());
+				move();
 				s.repaint();
 				frames.setInt(frames.getInt()+1);
 			}
