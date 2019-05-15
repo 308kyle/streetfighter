@@ -13,17 +13,17 @@ import java.util.Set;
 
 import javax.swing.JFrame;
 
-
 public class StreetFighter extends JFrame {
-	Fighter a = new Fighter(true);
-	Fighter b = new Fighter(false);
+	Fighter a = new Fighter(true,100,800);
+	Fighter b = new Fighter(false,800,800);
 	
 //	Queue<Integer> inputs = new LinkedList<Integer>();
 	ArrayList<Integer> pressed = new ArrayList<Integer>();
+	ArrayList<Integer> ai = new ArrayList<Integer>();
 	Map<Integer, AnimatedSprite> map = new HashMap<Integer, AnimatedSprite>();
 //	Set<Integer> pressed = new HashSet<Integer>();
 	
-	AnimatedSprite next;
+	MutableInt timer = new MutableInt(99);
 	
 	boolean cancellable;
 
@@ -53,10 +53,13 @@ public class StreetFighter extends JFrame {
 								
 					return;
 				}
-
+				
 				if(map.get(key)!=null && cancellable) {
 					a.current = map.get(key);
 					a.current.start();
+				}
+				if(key == KeyEvent.VK_R && timer.getInt()==0) {
+					new StreetFighter();
 				}
 
 			}
@@ -72,28 +75,19 @@ public class StreetFighter extends JFrame {
 			}
 		});
 		MutableInt frames = new MutableInt(0);
-		Screen s = new Screen(a, frames);
+		Screen s = new Screen(a, b, frames, timer);
 		this.add(s);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setUndecorated(true);
 		this.pack();
 		this.setVisible(true);
+		
 		new Thread() {
 			public void run() {
 				gameLoop(s, frames);
 			}
 		}.start();
 	}
-
-	public void move() {
-		if(next!=null) {
-			a.current.reset();
-			a.current = next;
-			a.current.start();
-		} else {
-			a.current = a.ryuIdle;
-		}
-	}	
 
 	public void gameLoop(Screen s, MutableInt frames) {
 
@@ -102,11 +96,12 @@ public class StreetFighter extends JFrame {
 		long last_time = System.currentTimeMillis();
 		long target_time = last_time + targetMillis;
 
-		while(true) {
+		while(timer.getInt()>0) {
 			long current = System.currentTimeMillis();
 			if(current>=target_time) {
 				if(frames.getInt()==60) {
 					frames.setInt(0);
+					timer.setInt(timer.getInt()-1);
 				}
 				last_time = current;
 				target_time = target_time + targetMillis;
