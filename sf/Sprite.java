@@ -30,7 +30,14 @@ public class Sprite {
 	public void setSprite(BufferedImage b) {
 		img = b;
 	}
-
+	public static Sprite[] mirror(Sprite[] a) {
+		Sprite[] copy = a.clone();
+		for(int i=0;i<a.length;i++) {
+			copy[i].setSprite(SpriteSheet.MirrorImage(a[i].getSprite()));
+		}
+		return copy;
+	}
+	
 	public int dx() {
 		return dx;
 	}

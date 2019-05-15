@@ -21,6 +21,7 @@ public class StreetFighter extends JFrame {
 	ArrayList<Integer> pressed = new ArrayList<Integer>();
 	ArrayList<Integer> ai = new ArrayList<Integer>();
 	Map<Integer, AnimatedSprite> map = new HashMap<Integer, AnimatedSprite>();
+	Map<Integer, AnimatedSprite> mapR = new HashMap<Integer, AnimatedSprite>();
 //	Set<Integer> pressed = new HashSet<Integer>();
 	
 	MutableInt timer = new MutableInt(99);
@@ -41,6 +42,18 @@ public class StreetFighter extends JFrame {
 		map.put(KeyEvent.VK_K, a.ryuPunch2);
 		map.put(KeyEvent.VK_L, a.ryuBlock);
 		
+		
+		mapR.put(KeyEvent.VK_LEFT, a.ryuWalkR);
+		//map.put(KeyEvent.VK_DOWN, a.ryuWalk);
+		mapR.put(KeyEvent.VK_RIGHT, a.ryuWalkR);
+		mapR.put(KeyEvent.VK_W, a.ryuJumpR);
+		mapR.put(KeyEvent.VK_A, a.ryuWalkR);
+		mapR.put(KeyEvent.VK_S, a.ryuCrouchR);
+		mapR.put(KeyEvent.VK_D, a.ryuWalkR);
+		mapR.put(KeyEvent.VK_J, a.ryuPunchR);
+		mapR.put(KeyEvent.VK_K, a.ryuPunch2R);
+		mapR.put(KeyEvent.VK_L, a.ryuBlockR);
+		
 		this.addKeyListener(new KeyListener() {	
 			public synchronized void keyPressed(KeyEvent e) {
 		
@@ -55,7 +68,7 @@ public class StreetFighter extends JFrame {
 				}
 				
 				if(map.get(key)!=null && cancellable) {
-					a.current = map.get(key);
+					a.current = mapR.get(key);
 					a.current.start();
 				}
 				if(key == KeyEvent.VK_R && timer.getInt()==0) {

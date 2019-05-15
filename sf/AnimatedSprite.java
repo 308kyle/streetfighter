@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnimatedSprite {
+public class AnimatedSprite implements Cloneable {
 
 	private Sprite[] animation;
 	private int currentFrame = 0;
@@ -30,11 +30,24 @@ public class AnimatedSprite {
 		length = animation.length;
 		stop = true;
 	}
-	public void flip() {
-		for(int i=0;i<animation.length;i++) {
-			animation[i].setSprite(SpriteSheet.MirrorImage(animation[i].getSprite()));
+	public static AnimatedSprite copy(AnimatedSprite a) {
+		try {
+			AnimatedSprite copy = (AnimatedSprite) a.clone();
+			
+			Sprite[] temp = new Sprite[a.sprites().length];
+			Sprite[] c = a.sprites().clone();
+			for(int i=0;i<a.sprites().length;i++) {
+				temp[i].setSprite(SpriteSheet.MirrorImage(c[i].getSprite()));
+			}
+		
+			return copy;
+		} catch (CloneNotSupportedException e) {
+			System.out.println("Reee");
 		}
+		return a;
+		
 	}
+	
 	
 	public void start() {
 		stop = false;
