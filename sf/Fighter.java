@@ -35,7 +35,7 @@ public class Fighter {
 	
 	private boolean human;
 	
-	private int hp = 50;
+	private int hp = 100;
 	
 	public Fighter(boolean human, int x2, int y2) {
 		this.human = human;
