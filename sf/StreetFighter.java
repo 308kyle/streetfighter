@@ -13,7 +13,7 @@ import java.util.Set;
 
 import javax.swing.JFrame;
 
-
+//xd
 public class StreetFighter extends JFrame {
 	Fighter a = new Fighter("ryu transparent.png");
 

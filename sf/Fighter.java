@@ -68,7 +68,7 @@ public class Fighter {
 		Sprite j6 = new Sprite(656, 9, 656+33-1, 9+90-1, 0, 4, s);
 		Sprite j7 = new Sprite(696, 24, 696+43-1, 24+75-1, 0, 4, s);
 		ryuJump = new AnimatedSprite(5, 49, false, false, new Sprite[] {j1, j2, j3, j4, j5, j6, j7});
-		
+		//xd
 		Sprite h1 = new Sprite(5, 760, 5+44-1, 760+77-1, 0, 0, s);
 		Sprite h2 = new Sprite(53, 761, 53+48-1, 761+76-1, 0, 0, s);
 		Sprite h3 = new Sprite(106, 771, 106+50-1, 771+66-1, 0, 0, s);
