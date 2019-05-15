@@ -33,7 +33,7 @@ public class Fighter {
 	
 	private boolean human;
 	
-	private int hp = 100;
+	private int hp = 50;
 	
 	public Fighter(boolean human) {
 		this.human = human;
@@ -138,6 +138,9 @@ public class Fighter {
 	public SpriteSheet getSheet() {
 		return s;
 	}
+	public int gethp() {
+		return hp;
+	}
 	
 	public void draw(Graphics g, int frames) {
 
@@ -145,9 +148,9 @@ public class Fighter {
 		g.setFont(new Font( "", Font.BOLD, 36));
 		g.setColor(Color.RED);
 		if(human) {
-			g.drawString("You", x.getInt()+50, y.getInt()-current.getSprite().getHeight()-10);
+			g.drawString("Player", x.getInt()+25, y.getInt()-current.getSprite().getHeight()-10);
 		}else {
-			g.drawString("CPU", x.getInt()+50, y.getInt()-current.getSprite().getHeight()-10);
+			g.drawString("CPU", x.getInt()+25, y.getInt()-current.getSprite().getHeight()-10);
 		}
 	}
 	
