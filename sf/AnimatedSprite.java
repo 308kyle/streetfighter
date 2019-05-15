@@ -67,11 +67,11 @@ public class AnimatedSprite {
 					frameCount = frameDelay+1;
 				}
 				if(!reverse) {
-					x.setInt(x.getInt()+animation[currentFrame].dx());
-					y.setInt(y.getInt()+animation[currentFrame].dy());
+					x.setInt(x.getInt()+deltax[currentFrame]);
+					y.setInt(y.getInt()+deltay[currentFrame]);
 				} else {
-					x.setInt(x.getInt()-animation[currentFrame].dx());
-					y.setInt(y.getInt()-animation[currentFrame].dy());
+					x.setInt(x.getInt()-deltax[currentFrame]);
+					y.setInt(y.getInt()-deltay[currentFrame]);
 				}
 			}
 		}

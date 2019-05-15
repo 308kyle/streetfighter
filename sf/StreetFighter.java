@@ -34,13 +34,9 @@ public class StreetFighter extends JFrame {
 		map.put(KeyEvent.VK_LEFT, a.ryuWalk);
 		//map.put(KeyEvent.VK_DOWN, a.ryuWalk);
 		map.put(KeyEvent.VK_RIGHT, a.ryuWalk);
-		map.put(KeyEvent.VK_W, a.ryuJump);
-		map.put(KeyEvent.VK_A, a.ryuWalk);
-		map.put(KeyEvent.VK_S, a.ryuCrouch);
-		map.put(KeyEvent.VK_D, a.ryuWalk);
-		map.put(KeyEvent.VK_J, a.ryuPunch);
-		map.put(KeyEvent.VK_K, a.ryuPunch2);
-		map.put(KeyEvent.VK_L, a.ryuBlock);
+		map.put(KeyEvent.VK_UP, a.ryuJump);
+		map.put(KeyEvent.VK_A, a.ryuPunch);
+		map.put(KeyEvent.VK_S, a.ryuPunch2);
 		
 		this.addKeyListener(new KeyListener() {	
 			public synchronized void keyPressed(KeyEvent e) {

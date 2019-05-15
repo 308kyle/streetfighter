@@ -20,8 +20,6 @@ public class Sprite {
 	private int h;
 	private BufferedImage img;
 	public Sprite( int x, int y, int x1, int y1, int dx, int dy, SpriteSheet s) {
-		x = x;
-		y = y;
 		w = x1 - x + 1;
 		h = y1 - y + 1;
 		dx = dx;
