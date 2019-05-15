@@ -13,9 +13,9 @@ import java.util.Set;
 
 import javax.swing.JFrame;
 
-//xd
+
 public class StreetFighter extends JFrame {
-	Fighter a = new Fighter("ryu transparent.png");
+	Fighter a = new Fighter();
 
 	
 //	Queue<Integer> inputs = new LinkedList<Integer>();
@@ -53,27 +53,9 @@ public class StreetFighter extends JFrame {
 				}
 
 				
-//				if(pressed.contains(KeyEvent.VK_ESCAPE)) {
-//					dispose();
-//					System.exit(0);
-//				}
-//
-//				if(pressed.contains(KeyEvent.VK_LEFT)) {
-//					next = a.ryuWalk;
-//					next.reverse();
-//				}
-//				else if(pressed.contains(KeyEvent.VK_RIGHT)) {
-//					next = a.ryuWalk;
-//				}
-//				else if(pressed.contains(KeyEvent.VK_UP)) {
-//					next = a.ryuJump;
-//				} 
-				
-				if(map.get(key)!=null&cancellable) {
-					a.current.reset();
+				if(map.get(key)!=null && cancellable) {
 					a.current = map.get(key);
 					a.current.start();
-					
 				}
 
 			}
@@ -82,9 +64,7 @@ public class StreetFighter extends JFrame {
 				
 				if(pressed.remove(new Integer(key))&&cancellable) {
 					a.current.reset();
-
 				}
-
 			}
 			public void keyTyped(KeyEvent arg0) {
 
@@ -130,16 +110,15 @@ public class StreetFighter extends JFrame {
 				last_time = current;
 				target_time = target_time + targetMillis;
 				
+				
 				if(a.current.stopped()) {
 					a.current = a.ryuIdle;
-					a.current.start();
 				}
 				cancellable = a.current.update(a.getX(), a.getY());
 				
-				for(Integer i : pressed) {
-					System.out.print(i);
+				if(cancellable) {
+					a.current.start();
 				}
-				System.out.println();
 				
 				s.repaint();
 				frames.setInt(frames.getInt()+1);

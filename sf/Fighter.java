@@ -4,7 +4,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class Fighter {
-	private SpriteSheet s;
+	
+	private SpriteSheet s = new SpriteSheet("ryu transparent.png");
 	AnimatedSprite ryuIdle;
 	AnimatedSprite ryuWalk;
 	AnimatedSprite ryuPunch;
@@ -25,10 +26,11 @@ public class Fighter {
 	private int direction = 1;
 	
 	private int grav = 5;
+	AnimatedSprite ryuCrouch;
+	AnimatedSprite ryuCBlock;
+	AnimatedSprite ryuBlock;
 	
-	public Fighter(String filename) {
-		
-		s = new SpriteSheet(filename);
+	public Fighter() {
 		
 		Sprite i1 = new Sprite(6, 18, 6+43-1, 18+81-1, 0, 0, s);
 		Sprite i2 = new Sprite(55, 19, 55+43-1, 19+80-1, 0, 0, s);
@@ -65,7 +67,7 @@ public class Fighter {
 		Sprite j6 = new Sprite(656, 9, 656+33-1, 656+90-1, 0, 0, s);
 		Sprite j7 = new Sprite(696, 24, 696+43-1, 696+75-1, 0, 0, s);
 		ryuJump = new AnimatedSprite(5, 49, false, false, new Sprite[] {j1, j2, j3, j4, j5, j6, j7});
-		//xd
+		
 		Sprite h1 = new Sprite(5, 760, 5+44-1, 760+77-1, 0, 0, s);
 		Sprite h2 = new Sprite(53, 761, 53+48-1, 761+76-1, 0, 0, s);
 		Sprite h3 = new Sprite(106, 771, 106+50-1, 771+66-1, 0, 0, s);
@@ -106,24 +108,34 @@ public class Fighter {
 		Sprite k7 = new Sprite(889, 765, 889+56-1, 765+72-1, 0, 0, s);
 		Sprite k8 = new Sprite(949, 742, 949+42-1, 742+95-1, 0, 0, s);
 		ryuKnock = new AnimatedSprite(0, 56, false, false, new Sprite[] {k1, k2, k3, k4, k5, k6, k7, k8});
-		if(filename.equals("ryu good transparent.png")) {
-			
-		}
+
+		
+
+		Sprite b1 = new Sprite(1211, 16, 1211+44-1, 16+84-1, 0, 0, s);
+		ryuBlock = new AnimatedSprite(0, 40, false, false, new Sprite[] {b1});
+		
+		Sprite b2 = new Sprite(1260, 38, 1260+44-1, 38+62-1, 0, 0, s);
+		ryuCBlock = new AnimatedSprite(0, 40, false, false, new Sprite[] {b2});
+		
+		Sprite c1 = new Sprite(1160, 44, 1160+44-1, 44+56-1, 0, 0, s);
+		ryuCrouch = new AnimatedSprite(0, 56, true, true, new Sprite[] {c1});
+	
+
+	
 
 		x = new MutableInt(100);
 		y = new MutableInt(600);
 		
-
 		current = ryuIdle;
 		
 	}
 	public SpriteSheet getSheet() {
 		return s;
 	}
+	
 	public void draw(Graphics g, int frames) {
 
 		g.drawImage(current.getSprite(), x.getInt(), y.getInt()-current.getSprite().getHeight(), null);
-		
 
 	}
 	
