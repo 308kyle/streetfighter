@@ -71,12 +71,6 @@ public class Fighter {
 		ryuIdle = new AnimatedSprite(0, 60, true, true, new Sprite[] {i1,i2,i3,i4});
 		ryuIdleR = new AnimatedSprite(0, 60, true, true, Sprite.mirror(new Sprite[] {i1,i2,i3,i4}));
 
-
-
-
-		ryuIdle = new AnimatedSprite(0, 60, true, true, new Sprite[] {i1, i2, i3, i4});
-
-
 		Sprite w1 = new Sprite(205, 24, 205+43-1, 24+75-1, 5, 0, s);
 		Sprite w2 = new Sprite(252, 19, 252+43-1, 19+80-1, 5, 0, s);
 		Sprite w3 = new Sprite(301, 18, 301+43-1, 18+81-1, 5, 0, s);
@@ -206,11 +200,13 @@ public class Fighter {
 
 		Sprite ck1 = new Sprite(660, 418, 660+50-1, 418+57-1, 0, 0, s);
 		Sprite ck2 = new Sprite(714, 417, 714+72-1, 417+58-1, 0, 0, s);
-		ryuCKick = new AnimatedSprite(0, 56, true, true, new Sprite[] {ck1, ck2, ck1});
+		ryuCKick = new AnimatedSprite(0, 15, false, false, new Sprite[] {ck1, ck2, ck1});
+		ryuCKickR = new AnimatedSprite(0, 15, false, false, Sprite.mirror(new Sprite[] {ck1, ck2, ck1}));
 
 		Sprite Jk1 = new Sprite(468, 551, 468+38-1, 551+64-1, 0, 0, s);
 		Sprite Jk2 = new Sprite(510, 554, 510+64-1, 554+55-1, 0, 0, s);
-		ryuJKick = new AnimatedSprite(0, 56, true, true, new Sprite[] {Jk1, Jk2, Jk1});
+		ryuJKick = new AnimatedSprite(0, 28, false, false, new Sprite[] {Jk1, Jk2, Jk1});
+		ryuJKick = new AnimatedSprite(0, 28, false, false, Sprite.mirror(new Sprite[] {Jk1, Jk2, Jk1}));
 		
 		x = new MutableInt(x2);
 		y = new MutableInt(y2);
