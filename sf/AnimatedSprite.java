@@ -77,7 +77,7 @@ public class AnimatedSprite {
 		}
 		return cancel;
 	}
-	
+	//xd
 	public void reset() {
 		stop = true;
 		reverse = false;
