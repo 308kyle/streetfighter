@@ -39,6 +39,7 @@ public class Screen extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		st.draw(g);
+
 		
 		one.draw(g);
 		two.draw(g);
@@ -47,5 +48,15 @@ public class Screen extends JPanel {
 		g.setColor(Color.yellow);
 		g.drawString(""+timer.getInt(), d.width/2, 100);
 		
+
+		
+		g.setColor(Color.GREEN);
+		g.drawRect(100, 10, 600, 50);
+		g.drawRect(1000, 10, 600, 50);
+		g.fillRect(100, 10, (int)600*one.gethp()/100, 50);
+		g.fillRect(1000+((int)600*one.gethp()/100), 10, 600-(1600-(1000+((int)600*one.gethp()/100))), 50);
+		
+		
+
 	}
 }
