@@ -44,7 +44,6 @@ public class Fighter {
 	AnimatedSprite ryuV1R;
 	AnimatedSprite ryuFHitR;
 	AnimatedSprite ryuKnockR;
-	AnimatedSprite currentR;
 	AnimatedSprite ryuBlockR;
 	AnimatedSprite ryuCBlockR;
 	AnimatedSprite ryuCrouchR;
@@ -105,7 +104,7 @@ public class Fighter {
     
 		Sprite p11 = new Sprite(3, 134, 3+43-1, 134+81-1, 0, 0, s);
 		Sprite p12 = new Sprite(52, 134, 52+57-1, 134+81-1, 0, 0, s);
-		p12.addBox(new Rectangle(30, 10, 31+1, 14+1));
+		//p12.addBox(new Rectangle(30, 10, 31+1, 14+1));
 		Sprite p13 = new Sprite(117, 134, 117+43-1, 134+81-1, 0, 0, s);
 		p11.createBox();
 		p12.createBox();
@@ -117,7 +116,7 @@ public class Fighter {
 		Sprite p21 = new Sprite(170, 134, 170+43-1, 134+81-1, 0, 0, s);
 		Sprite p22 = new Sprite(218, 130, 218+51-1, 130+85-1, 0, 0, s);
 		Sprite p23 = new Sprite(274, 130, 274+72-1, 130+85-1, 0, 0, s);
-		p23.addBox(new Rectangle(41, 12, 35+1, 14+1));
+		//p23.addBox(new Rectangle(41, 12, 35+1, 14+1));
 		Sprite p24 = new Sprite(353, 130, 353+51-1, 130+85-1, 0, 0, s);
 		Sprite p25 = new Sprite(411, 134, 411+43-1, 134+81-1, 0, 0, s);
 		p25.createBox();
@@ -224,12 +223,12 @@ public class Fighter {
 		Sprite ck1 = new Sprite(660, 418, 660+50-1, 418+57-1, 0, 0, s);
 		Sprite ck2 = new Sprite(714, 417, 714+72-1, 417+58-1, 0, 0, s);
 		ryuCKick = new AnimatedSprite(0, 15, false, false, new Sprite[] {ck1, ck2, ck1});
-		ryuCKickR = new AnimatedSprite(0, 15, false, false, Sprite.mirror(new Sprite[] {ck1, ck2, ck1}));
+		ryuCKickR = new AnimatedSprite(0, 15, false, false, Sprite.clones(new Sprite[] {ck1, ck2, ck1}));
 
 		Sprite Jk1 = new Sprite(468, 551, 468+38-1, 551+64-1, 0, 0, s);
 		Sprite Jk2 = new Sprite(510, 554, 510+64-1, 554+55-1, 0, 0, s);
 		ryuJKick = new AnimatedSprite(0, 28, false, false, new Sprite[] {Jk1, Jk2, Jk1});
-		ryuJKickR = new AnimatedSprite(0, 28, false, false, Sprite.mirror(new Sprite[] {Jk1, Jk2, Jk1}));
+		ryuJKickR = new AnimatedSprite(0, 28, false, false, Sprite.clones(new Sprite[] {Jk1, Jk2, Jk1}));
 		
 
 		x = new MutableInt(x2);
@@ -238,13 +237,16 @@ public class Fighter {
 		current = ryuIdle;
 
 	}
+	
 	public SpriteSheet getSheet() {
 		return s;
 	}
 	public int gethp() {
 		return hp;
 	}
-
+	public void sethp(int newhp) {
+		hp = newhp;
+	}
 
 	public void draw(Graphics g) {
 		if(direction==1) {

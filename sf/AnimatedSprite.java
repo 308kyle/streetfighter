@@ -94,5 +94,10 @@ public class AnimatedSprite implements Cloneable {
 			return animation[currentFrame].getSprite();
 		return animation[animation.length-1-currentFrame].getSprite();
 	}
-	
+	public Sprite getSSprite() {
+		if(!reverse)
+			return animation[currentFrame];
+		return animation[animation.length-1-currentFrame];
+	}
+
 }
