@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 public class Fighter {
 	
 	private SpriteSheet s = new SpriteSheet("ryu transparent.png");
+	
 	AnimatedSprite ryuIdle;
 	AnimatedSprite ryuWalk;
 	AnimatedSprite ryuPunch;
@@ -28,10 +29,12 @@ public class Fighter {
 	
 	private int direction = 1;
 	
-	private int grav = 5;
+	private boolean human;
 	
+	private int hp = 100;
 	
-	public Fighter() {
+	public Fighter(boolean human) {
+		this.human = human;
 		
 		Sprite i1 = new Sprite(6, 18, 6+43-1, 18+81-1, 0, 0, s);
 		Sprite i2 = new Sprite(55, 19, 55+43-1, 19+80-1, 0, 0, s);
@@ -121,11 +124,11 @@ public class Fighter {
 		Sprite c1 = new Sprite(1160, 44, 1160+44-1, 44+56-1, 0, 0, s);
 		ryuCrouch = new AnimatedSprite(0, 56, true, true, new Sprite[] {c1});
 	
-
-	
+		
+		
 
 		x = new MutableInt(100);
-		y = new MutableInt(600);
+		y = new MutableInt(800);
 		
 		current = ryuIdle;
 		
@@ -152,6 +155,9 @@ public class Fighter {
 	}
 	public void setY(int a) {
 		y.setInt(a);
+	}
+	public boolean human() {
+		return human;
 	}
 
 }

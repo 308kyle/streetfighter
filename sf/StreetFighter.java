@@ -15,8 +15,8 @@ import javax.swing.JFrame;
 
 
 public class StreetFighter extends JFrame {
-	Fighter a = new Fighter();
-
+	Fighter a = new Fighter(true);
+	Fighter b = new Fighter(false);
 	
 //	Queue<Integer> inputs = new LinkedList<Integer>();
 	ArrayList<Integer> pressed = new ArrayList<Integer>();
@@ -27,7 +27,6 @@ public class StreetFighter extends JFrame {
 	
 	boolean cancellable;
 
-	
 	public StreetFighter() {
 		super("Street Fighter");
 
@@ -51,12 +50,10 @@ public class StreetFighter extends JFrame {
 					pressed.add(key);
 				}
 				if(pressed.size()>1) {
-					
-					
+								
 					return;
 				}
 
-				
 				if(map.get(key)!=null && cancellable) {
 					a.current = map.get(key);
 					a.current.start();
@@ -120,8 +117,6 @@ public class StreetFighter extends JFrame {
 					a.current.start();
 				}
 				cancellable = a.current.update(a.getX(), a.getY());
-				
-				
 				
 				s.repaint();
 				frames.setInt(frames.getInt()+1);
