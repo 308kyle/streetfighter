@@ -1,21 +1,18 @@
 package sf;
 
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
+
 import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
+
 
 import javax.swing.JFrame;
 
 public class StreetFighter extends JFrame {
 	Fighter a = new Fighter(true,300,800);
-	Fighter b = new Fighter(false,800,800);
+	Fighter b = new Fighter(false,1500,800);
 
 	//	Queue<Integer> inputs = new LinkedList<Integer>();
 	ArrayList<Integer> pressed = new ArrayList<Integer>();
@@ -23,14 +20,17 @@ public class StreetFighter extends JFrame {
 	Map<Integer, AnimatedSprite> map = new HashMap<Integer, AnimatedSprite>();
 	Map<Integer, AnimatedSprite> mapR = new HashMap<Integer, AnimatedSprite>();
 	//	Set<Integer> pressed = new HashSet<Integer>();
+	int[] keys = {KeyEvent.VK_A,KeyEvent.VK_S,KeyEvent.VK_D};
+
 
 	MutableInt timer = new MutableInt(99);
 
-	int frameCount = 0;
+	int lastFrame = 0;
+	int count = 0;
 
 	boolean cancellable;
 	boolean cancellable2;
-	
+
 	public StreetFighter() {
 		super("Street Fighter");
 
@@ -59,24 +59,33 @@ public class StreetFighter extends JFrame {
 				if(!pressed.contains(new Integer(key))) {
 					pressed.add(key);
 				}
+				if(key == KeyEvent.VK_ESCAPE) {
+					dispose();
+					System.exit(0);
+				}
+				System.out.println(pressed.size());
 				if(pressed.size()>1) {
 					for(int i=pressed.size()-1;i>0;i--) {
 						if(pressed.get(i)==KeyEvent.VK_A) {
 							if(pressed.get(i-1)==KeyEvent.VK_DOWN) {
-
+								a.current = a.ryuCKick;
+								a.current.start();
+								
 							}
 						}
 					}
 				}
-
-				if(map.get(key)!=null && cancellable) {
-					if(a.getDirection()==1) {
-						a.current = map.get(key);
-					} else {
-						a.current = mapR.get(key);
+				else {
+					if(map.get(key)!=null && cancellable) {
+						if(a.getDirection()==1) {
+							a.current = map.get(key);
+						} else {
+							a.current = mapR.get(key);
+						}
+						a.current.start();
 					}
-					a.current.start();
 				}
+
 				if(key == KeyEvent.VK_R && timer.getInt()==0) {
 					new StreetFighter();
 				}
@@ -84,8 +93,8 @@ public class StreetFighter extends JFrame {
 			}
 			public synchronized void keyReleased(KeyEvent e) {
 				int key = e.getKeyCode();
-
-				if(pressed.remove(new Integer(key))&&cancellable) {
+				pressed.remove(new Integer(key));
+				if(cancellable) {
 					a.current.reset();
 				}
 			}
@@ -108,15 +117,39 @@ public class StreetFighter extends JFrame {
 		}.start();
 	}
 	public void move() {
-		
-		if(timer.getInt()<97) {
-			if(a.getX().getInt()-b.getX().getInt()<50) {
-				b.current = b.ryuWalkLR;
-			} else if(a.getX().getInt()-b.getX().getInt()>50) {
-				b.current = b.ryuWalk;
+		if(b.current.stopped()) {
+			if(a.getDirection()==-1) {
+				b.current = b.ryuIdle;
+			} else {
+				b.current = b.ryuIdleR;
 			}
-			System.out.println("started");
-			System.out.println(b.getX().getInt());
+			b.current.start();
+		}
+		if(timer.getInt()<97) {
+			if(a.getX().getInt()-b.getX().getInt()<-200) {
+				count++;
+				if(count>45) {
+					b.current = b.ryuWalkLR;
+				}
+			} else if(a.getX().getInt()-b.getX().getInt()>200) {
+				count++;
+				if(count>45) {
+					b.current = b.ryuWalk;
+				}
+			} else {
+				count = 0;
+				int k = (int) (Math.random()*keys.length);
+				if(cancellable2) {
+					b.current.reset();
+					if(a.getDirection() == -1) {
+						b.current = map.get(keys[k]); 
+					}
+					else if(a.getDirection() == 1) {
+						b.current = mapR.get(keys[k]); 
+					}
+				}
+			}
+
 			b.current.start();
 
 		} else {
@@ -130,6 +163,7 @@ public class StreetFighter extends JFrame {
 		final int targetMillis = 1000/fps;
 		long last_time = System.currentTimeMillis();
 		long target_time = last_time + targetMillis;
+
 
 		while(timer.getInt()>0) {
 			long current = System.currentTimeMillis();
@@ -151,9 +185,11 @@ public class StreetFighter extends JFrame {
 
 				cancellable = a.current.update(a.getX(), a.getY());
 				cancellable2 = b.current.update(b.getX(), b.getY());
-				
+
 				a.setDirection(b.getX().getInt());
+				b.setDirection(a.getX().getInt());
 				move();
+
 				s.repaint();
 				frames.setInt(frames.getInt()+1);
 			}
