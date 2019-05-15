@@ -32,5 +32,12 @@ public class Screen extends JPanel {
 		super.paintComponent(g);
 		st.draw(g);
 		one.draw(g, frames.getInt());
+		g.setColor(Color.GREEN);
+		g.drawRect(100, 10, 600, 50);
+		g.drawRect(1000, 10, 600, 50);
+		g.fillRect(100, 10, (int)600*one.gethp()/100, 50);
+		g.fillRect(1000+((int)600*one.gethp()/100), 10, 600-(1600-(1000+((int)600*one.gethp()/100))), 50);
+		
+		//g.drawRect(, y, width, height);
 	}
 }
