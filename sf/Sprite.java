@@ -22,8 +22,8 @@ public class Sprite {
 	public Sprite( int x, int y, int x1, int y1, int dx, int dy, SpriteSheet s) {
 		w = x1 - x + 1;
 		h = y1 - y + 1;
-		dx = dx;
-		dy = dy;
+		this.dx = dx;
+		this.dy = dy;
 		img = s.getSprite(x, y, w, h, 4);		
 	}
 	public BufferedImage getSprite() {
