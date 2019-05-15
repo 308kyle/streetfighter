@@ -20,6 +20,7 @@ public class StreetFighter extends JFrame {
 	
 //	Queue<Integer> inputs = new LinkedList<Integer>();
 	ArrayList<Integer> pressed = new ArrayList<Integer>();
+	ArrayList<Integer> ai = new ArrayList<Integer>();
 	Map<Integer, AnimatedSprite> map = new HashMap<Integer, AnimatedSprite>();
 //	Set<Integer> pressed = new HashSet<Integer>();
 	

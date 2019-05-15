@@ -19,9 +19,6 @@ public class AnimatedSprite {
 	private boolean reverse;
 	private boolean repeat;
 
-	private int[] deltax;
-	private int[] deltay;
-
 	public AnimatedSprite(int frameDelay, int frameDuration, boolean repeat, boolean cancel, Sprite[] a) {
 		animation = a;
 
@@ -54,7 +51,7 @@ public class AnimatedSprite {
 		if(!stop) {
 			frameCount++;
 			
-			if(frameCount > frameDelay) {	
+			if(frameCount >= frameDelay) {	
 				
 				currentFrame = (frameCount-frameDelay)/framespersprite;
 				
