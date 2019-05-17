@@ -1,5 +1,6 @@
 package sf;
 
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import javax.swing.JFrame;
 public class StreetFighter extends JFrame {
 	Fighter a = new Fighter(true,300,800);
 	Fighter b = new Fighter(false,1500,800);
-
+	
 	//	Queue<Integer> inputs = new LinkedList<Integer>();
 	ArrayList<Integer> pressed = new ArrayList<Integer>();
 	ArrayList<Integer> ai = new ArrayList<Integer>();
@@ -63,14 +64,13 @@ public class StreetFighter extends JFrame {
 					dispose();
 					System.exit(0);
 				}
-				System.out.println(pressed.size());
 				if(pressed.size()>1) {
 					for(int i=pressed.size()-1;i>0;i--) {
 						if(pressed.get(i)==KeyEvent.VK_A) {
 							if(pressed.get(i-1)==KeyEvent.VK_DOWN) {
 								a.current = a.ryuCKick;
 								a.current.start();
-								
+
 							}
 						}
 					}
@@ -119,18 +119,26 @@ public class StreetFighter extends JFrame {
 	public void collisions() {
 		AnimatedSprite ac = a.current;
 		AnimatedSprite bc = b.current;
-		if(ac!= a.ryuIdle) {
-			if(ac.getSSprite().box.get(0).intersects(bc.getSSprite().box.get(0))) {
-				if(ac!=a.ryuWalk) {
-					b.sethp(b.gethp()-10);
-				}
+	
+		if(a.getDirection()==1) {
+			
+		}
+		Rectangle a1 = new Rectangle(ac.getSSprite().box.get(0).x+(a.getX().getInt()-150),ac.getSSprite().box.get(0).y+
+				(a.getY().getInt()-a.current.getSprite().getHeight()),
+				ac.getSSprite().box.get(0).width,ac.getSSprite().box.get(0).height);
+		Rectangle a2 = new Rectangle(ac.getSSprite().box.get(0).x+(a.getX().getInt()-a.current.getSprite().getWidth()),
+				bc.getSSprite().box.get(0).y+(a.getY().getInt()-a.current.getSprite().getHeight()),
+				bc.getSSprite().box.get(0).width,
+				bc.getSSprite().box.get(0).height);
+		if(a1.intersects(a2)) {
+			if(ac!=a.ryuWalk) {
+				b.sethp(b.gethp()-10);
 			}
 		}
-		if(bc!= b.ryuIdle) {
-			if(ac.getSSprite().box.get(0).intersects(bc.getSSprite().box.get(0))) {
-				if(bc!=b.ryuWalk) {
-					a.sethp(a.gethp()-10);
-				}
+
+		else if(a1.intersects(a2)) {
+			if(bc!=b.ryuWalk) {
+				a.sethp(a.gethp()-10);
 			}
 		}
 	}
@@ -200,13 +208,13 @@ public class StreetFighter extends JFrame {
 					a.current = a.ryuIdleR;
 					a.current.start();
 				}
-
 				cancellable = a.current.update(a.getX(), a.getY());
 				cancellable2 = b.current.update(b.getX(), b.getY());
 
 				a.setDirection(b.getX().getInt());
 				b.setDirection(a.getX().getInt());
 				move();
+				collisions();
 
 				s.repaint();
 				frames.setInt(frames.getInt()+1);

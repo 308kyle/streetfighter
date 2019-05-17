@@ -41,8 +41,8 @@ public class Screen extends JPanel {
 		st.draw(g);
 
 		
-		one.draw(g);
 		two.draw(g);
+		one.draw(g);
 		
 		g.setFont(new Font("Times New Roman", Font.BOLD, 36));
 		g.setColor(Color.yellow);

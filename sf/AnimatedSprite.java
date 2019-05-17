@@ -84,7 +84,6 @@ public class AnimatedSprite implements Cloneable {
 	
 	public void reset() {
 		stop = true;
-	//	reverse = false;
 		frameCount = 0;
 		currentFrame = 0;
 		
