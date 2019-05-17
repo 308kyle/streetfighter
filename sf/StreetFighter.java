@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 public class StreetFighter extends JFrame {
 	Fighter a = new Fighter(true,300,800);
 	Fighter b = new Fighter(false,1500,800);
-	public static boolean noWinner = true;
+	private boolean noWinner = true;
 	//	Queue<Integer> inputs = new LinkedList<Integer>();
 	ArrayList<Integer> pressed = new ArrayList<Integer>();
 	ArrayList<Integer> ai = new ArrayList<Integer>();
@@ -157,6 +157,66 @@ public class StreetFighter extends JFrame {
 				gameLoop(s, frames);
 			}
 		}.start();
+	}
+	public void win() {
+		if(a.gethp()==0) {
+			if(a.getDirection()==1) {
+				a.current.reset();
+				cancellable = false;
+				a.current = a.ryuKO;
+				a.current.start();
+				
+				b.current.reset();
+				cancellable2 = false;
+				b.current = b.ryuV1R;
+				b.current.start();
+				
+				if(b.current.getSSprite()==b.ryuV1R.sprites()[2]) {
+					noWinner = false;
+				}
+			}else {
+				a.current.reset();
+				cancellable = false;
+				a.current = a.ryuKOR;
+				a.current.start();
+				
+				b.current.reset();
+				cancellable2 = false;
+				b.current = b.ryuV1;
+				b.current.start();
+				if(b.current.getSSprite()==b.v3) {
+					noWinner = false;
+				}
+			}
+		}else if(b.gethp()==0){
+			if(b.getDirection()==1) {
+				b.current.reset();
+				cancellable2 = false;
+				b.current = b.ryuKO;
+				b.current.start();
+				
+				a.current.reset();
+				cancellable = false;
+				a.current = a.ryuV1R;
+				a.current.start();
+				if(a.current.getSSprite()==a.ryuV1R.sprites()[2]) {
+					noWinner = false;
+				}
+			}else {
+				b.current.reset();
+				cancellable2 = false;
+				b.current = b.ryuKOR;
+				b.current.start();
+				
+				a.current.reset();
+				cancellable = false;
+				a.current = a.ryuV1;
+				a.current.start();
+				if(a.current.getSSprite()==a.v3) {
+					noWinner = false;
+				}
+			}
+		}
 	}
 	public void collisions() {	
 

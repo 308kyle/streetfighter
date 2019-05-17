@@ -41,8 +41,8 @@ public class Screen extends JPanel {
 		st.draw(g);
 
 		
-		two.draw(g);
 		one.draw(g);
+		two.draw(g);
 		
 		g.setFont(new Font("Times New Roman", Font.BOLD, 36));
 		g.setColor(Color.yellow);
@@ -56,10 +56,9 @@ public class Screen extends JPanel {
 		g.setColor(Color.GREEN);
 		g.drawRect(50, 50, 600, 50);
 		g.drawRect(950, 50, 600, 50);
-
-		g.fillRect(50, 50, (int)(600*one.gethp()/100), 50);
+		g.fillRect(50, 50, (int)600*one.gethp()/100, 50);
 		g.fillRect(1550-(int)(600*one.gethp()/100), 50, (int)(600*one.gethp()/100), 50);
-
+		
 		
 
 	}
