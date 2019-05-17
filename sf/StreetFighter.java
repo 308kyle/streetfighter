@@ -75,6 +75,7 @@ public class StreetFighter extends JFrame {
 									
 								} else {		
 									a.current = a.ryuCKickR;
+									a.current.reverse2();
 									a.current.start();
 										
 								}
@@ -89,6 +90,7 @@ public class StreetFighter extends JFrame {
 									
 								} else {		
 									a.current = a.ryuFJumpR;
+									a.current.reverse2();
 									a.current.start();
 										
 								}
@@ -100,7 +102,7 @@ public class StreetFighter extends JFrame {
 									
 								} else {		
 									a.current = a.ryuFJumpR;
-									a.current.reverse2();
+								
 									a.current.start();
 										
 								}
@@ -154,21 +156,7 @@ public class StreetFighter extends JFrame {
 		AnimatedSprite bc = b.current;
 
 
-		if(a.getDirection()==1) {
-
-		}
-		Rectangle a1 = new Rectangle(ac.getSSprite().box.get(0).x+(a.getX().getInt()-150),ac.getSSprite().box.get(0).y+
-				(a.getY().getInt()-a.current.getSprite().getHeight()),
-				ac.getSSprite().box.get(0).width,ac.getSSprite().box.get(0).height);
-		Rectangle a2 = new Rectangle(ac.getSSprite().box.get(0).x+(a.getX().getInt()-a.current.getSprite().getWidth()),
-				bc.getSSprite().box.get(0).y+(a.getY().getInt()-a.current.getSprite().getHeight()),
-				bc.getSSprite().box.get(0).width,
-				bc.getSSprite().box.get(0).height);
-		if(a1.intersects(a2)) {
-			if(ac!=a.ryuWalk) {
-				b.sethp(b.gethp()-10);
-			}
-		}
+		
 
 
 		ac.getSSprite().box.get(0).setLocation(ac.getSSprite().box.get(0).x+(a.getX().getInt()-150),
