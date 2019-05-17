@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class Sprite {
-	public ArrayList<Rectangle> box = new ArrayList<Rectangle>();
+	private ArrayList<Rectangle> box = new ArrayList<Rectangle>();
 	private int dx;
 	private int dy;
 	
@@ -90,6 +90,12 @@ public class Sprite {
 	public int y() {
 		return y;
 	}
+	public void setx(int a) {
+		x = a;
+	}
+	public void sety(int a) {
+		y = a;
+	}
 	public int x1() {
 		return x1;
 	}
@@ -103,7 +109,10 @@ public class Sprite {
 		box.add(b);
 	}
 	public void createBox() {
-		box.add(new Rectangle(w, h));
+		box.add(new Rectangle(x, y, w, h));
+	}
+	public Rectangle getBox() {
+		return box.get(0);
 	}
 	
 }

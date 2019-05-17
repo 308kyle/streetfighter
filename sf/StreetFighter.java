@@ -120,14 +120,14 @@ public class StreetFighter extends JFrame {
 		AnimatedSprite ac = a.current;
 		AnimatedSprite bc = b.current;
 		if(ac!= a.ryuIdle) {
-			if(ac.getSSprite().box.get(0).intersects(bc.getSSprite().box.get(0))) {
+			if(ac.getSSprite().getBox().intersects(bc.getSSprite().getBox())) {
 				if(ac!=a.ryuWalk) {
 					b.sethp(b.gethp()-10);
 				}
 			}
 		}
 		if(bc!= b.ryuIdle) {
-			if(ac.getSSprite().box.get(0).intersects(bc.getSSprite().box.get(0))) {
+			if(ac.getSSprite().getBox().intersects(bc.getSSprite().getBox())) {
 				if(bc!=b.ryuWalk) {
 					a.sethp(a.gethp()-10);
 				}
@@ -175,6 +175,7 @@ public class StreetFighter extends JFrame {
 			b.current.start();
 		}
 	}
+	@SuppressWarnings("deprecation")
 	public void gameLoop(Screen s, MutableInt frames) {
 
 		final int fps = 60;
@@ -207,7 +208,9 @@ public class StreetFighter extends JFrame {
 				a.setDirection(b.getX().getInt());
 				b.setDirection(a.getX().getInt());
 				move();
-
+				a.current.getSSprite().getBox().setLocation(a.current.getSSprite().x(), a.current.getSSprite().y());
+				b.current.getSSprite().getBox().setLocation(b.current.getSSprite().x(), b.current.getSSprite().y());
+				
 				s.repaint();
 				frames.setInt(frames.getInt()+1);
 			}

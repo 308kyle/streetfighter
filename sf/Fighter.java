@@ -209,24 +209,32 @@ public class Fighter {
 		ryuKnockR = new AnimatedSprite(0, 56, false, false, Sprite.clones(new Sprite[] {k1, k2, k3, k4, k5, k6, k7, k8}));
 
 		Sprite b1 = new Sprite(1211, 16, 1211+44-1, 16+84-1, 0, 0, s);
+		b1.createBox();
 		ryuBlock = new AnimatedSprite(0, 40, false, false, new Sprite[] {b1});
 		ryuBlockR = new AnimatedSprite(0, 40, false, false, Sprite.clones(new Sprite[] {b1}));
 
 		Sprite b2 = new Sprite(1260, 38, 1260+44-1, 38+62-1, 0, 0, s);
+		b2.createBox();
 		ryuCBlock = new AnimatedSprite(0, 40, false, false, new Sprite[] {b2});
 		ryuCBlockR = new AnimatedSprite(0, 40, false, false, Sprite.clones(new Sprite[] {b2}));
 
+		
 		Sprite c1 = new Sprite(1160, 44, 1160+44-1, 44+56-1, 0, 0, s);
+		c1.createBox();
 		ryuCrouch = new AnimatedSprite(0, 56, true, true, new Sprite[] {c1});
 		ryuCrouchR = new AnimatedSprite(0, 56, true, true, Sprite.clones(new Sprite[] {c1}));
 
 		Sprite ck1 = new Sprite(660, 418, 660+50-1, 418+57-1, 0, 0, s);
 		Sprite ck2 = new Sprite(714, 417, 714+72-1, 417+58-1, 0, 0, s);
+		ck1.createBox();
+		ck2.createBox();
 		ryuCKick = new AnimatedSprite(0, 15, false, false, new Sprite[] {ck1, ck2, ck1});
 		ryuCKickR = new AnimatedSprite(0, 15, false, false, Sprite.clones(new Sprite[] {ck1, ck2, ck1}));
 
 		Sprite Jk1 = new Sprite(468, 551, 468+38-1, 551+64-1, 0, 0, s);
 		Sprite Jk2 = new Sprite(510, 554, 510+64-1, 554+55-1, 0, 0, s);
+		Jk1.createBox();
+		Jk2.createBox();
 		ryuJKick = new AnimatedSprite(0, 28, false, false, new Sprite[] {Jk1, Jk2, Jk1});
 		ryuJKickR = new AnimatedSprite(0, 28, false, false, Sprite.clones(new Sprite[] {Jk1, Jk2, Jk1}));
 		
