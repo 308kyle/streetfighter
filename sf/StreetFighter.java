@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 public class StreetFighter extends JFrame {
 	Fighter a = new Fighter(true,300,800);
 	Fighter b = new Fighter(false,1500,800);
-	
+
 	//	Queue<Integer> inputs = new LinkedList<Integer>();
 	ArrayList<Integer> pressed = new ArrayList<Integer>();
 	ArrayList<Integer> ai = new ArrayList<Integer>();
@@ -119,28 +119,119 @@ public class StreetFighter extends JFrame {
 	public void collisions() {
 		AnimatedSprite ac = a.current;
 		AnimatedSprite bc = b.current;
-	
-		if(a.getDirection()==1) {
-			
-		}
-		Rectangle a1 = new Rectangle(ac.getSSprite().box.get(0).x+(a.getX().getInt()-150),ac.getSSprite().box.get(0).y+
-				(a.getY().getInt()-a.current.getSprite().getHeight()),
-				ac.getSSprite().box.get(0).width,ac.getSSprite().box.get(0).height);
-		Rectangle a2 = new Rectangle(ac.getSSprite().box.get(0).x+(a.getX().getInt()-a.current.getSprite().getWidth()),
-				bc.getSSprite().box.get(0).y+(a.getY().getInt()-a.current.getSprite().getHeight()),
-				bc.getSSprite().box.get(0).width,
-				bc.getSSprite().box.get(0).height);
-		if(a1.intersects(a2)) {
-			if(ac!=a.ryuWalk) {
-				b.sethp(b.gethp()-10);
+
+		ac.getSSprite().box.get(0).setLocation(ac.getSSprite().box.get(0).x+(a.getX().getInt()-150),
+				ac.getSSprite().box.get(0).y+(a.getY().getInt()-a.current.getSprite().getHeight()));
+		bc.getSSprite().box.get(0).setLocation(bc.getSSprite().box.get(0).x+(b.getX().getInt()-150),
+				bc.getSSprite().box.get(0).y+(b.getY().getInt()-b.current.getSprite().getHeight()));
+		if(ac.getSSprite().box.get(0).intersects(bc.getSSprite().box.get(0))) {
+			if(a.getDirection()==1) {
+				if(ac==a.ryuWalk) {
+					if(bc==b.ryuIdle||bc==b.ryuBlock||bc==b.ryuCBlock||bc==b.ryuCrouch) {
+						a.setX((a.getX().getInt()-150)-ac.getSSprite().dx());
+					}
+					if(bc==b.ryuWalk) {
+						a.setX((a.getX().getInt()-150)-ac.getSSprite().dx());
+						b.setX((b.getX().getInt()-150)+bc.getSSprite().dx());
+					}
+					if(bc==b.ryuPunch||bc==b.ryuPunch2) {
+						ac.reset();
+						ac = a.ryuFHit;
+						ac.start();
+						a.sethp(a.gethp()-10);
+					}
+					if(bc==b.ryuCKick) {
+						ac.reset();
+						ac = a.ryuHit;
+						ac.start();
+						a.sethp(a.gethp()-10);
+					}
+				}
+				if(ac==a.ryuIdle) {
+					if(bc==b.ryuWalk) {
+						b.setX((b.getX().getInt()-150)+bc.getSSprite().dx());
+					}
+					if(bc==b.ryuPunch||bc==b.ryuPunch2) {
+						ac.reset();
+						ac = a.ryuFHit;
+						ac.start();
+						a.sethp(a.gethp()-10);
+					}
+					if(bc==b.ryuCKick) {
+						ac.reset();
+						ac = a.ryuHit;
+						ac.start();
+						a.sethp(a.gethp()-10);
+					}
+				}
+				if(ac==a.ryuBlock) {
+					if(bc==b.ryuWalk) {
+						b.setX((b.getX().getInt()-150)+bc.getSSprite().dx());
+					}
+					if(bc==b.ryuCKick) {
+						ac.reset();
+						ac = a.ryuHit;
+						ac.start();
+						a.sethp(a.gethp()-10);
+					}
+				}
+				if(ac==a.ryuCBlock) {
+					if(bc==b.ryuWalk) {
+						b.setX((b.getX().getInt()-150)+bc.getSSprite().dx());
+					}
+				}
+				if(ac==a.ryuPunch||ac==a.ryuPunch2) {
+					if(bc==b.ryuWalk||bc==b.ryuIdle) {
+						bc.reset();
+						bc = b.ryuFHit;
+						bc.start();
+						b.sethp(b.gethp()-10);
+					}
+					if(bc==b.ryuHit||bc==b.ryuFHit) {
+						bc.reset();
+						bc = b.ryuFHit;
+						bc.start();
+						b.sethp(b.gethp()-10);
+					}
+					if(bc==b.ryuPunch||bc==b.ryuPunch2) {
+						bc.reset();
+						ac.reset();
+						bc = b.ryuFHit;
+						bc = b.ryuFHit;
+						bc.start();
+						ac.start();
+						b.sethp(b.gethp()-10);
+						a.sethp(a.gethp()-10);
+					}
+				}
+				if(ac==a.ryuCKick) {
+					if(bc==b.ryuWalk||bc==b.ryuIdle) {
+						ac.reset();
+						ac = a.ryuHit;
+						ac.start();
+						a.sethp(a.gethp()-10);
+					}
+					if(bc==b.ryuHit||bc==b.ryuFHit) {
+						ac.reset();
+						ac = a.ryuFHit;
+						ac.start();
+						a.sethp(a.gethp()-10);
+					}
+				}
+				if(ac==a.ryuCrouch) {
+					if(bc==b.ryuWalk) {
+						b.setX((b.getX().getInt()-150)+bc.getSSprite().dx());
+					}
+					if(bc==b.ryuCKick) {
+						ac.reset();
+						ac = a.ryuHit;
+						ac.start();
+						a.sethp(a.gethp()-10);
+					}
+				}
 			}
 		}
 
-		else if(a1.intersects(a2)) {
-			if(bc!=b.ryuWalk) {
-				a.sethp(a.gethp()-10);
-			}
-		}
 	}
 	public void move() {
 		if(b.current.stopped()) {

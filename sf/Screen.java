@@ -59,7 +59,6 @@ public class Screen extends JPanel {
 		g.fillRect(50, 50, (int)600*one.gethp()/100, 50);
 		g.fillRect(1550-(int)(600*one.gethp()/100), 50, (int)(600*one.gethp()/100), 50);
 		
-		
 
 	}
 }

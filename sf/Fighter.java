@@ -16,8 +16,6 @@ public class Fighter {
 	AnimatedSprite ryuPunch2;
 	AnimatedSprite ryuJump;
 	AnimatedSprite ryuHit;
-	AnimatedSprite ryuHad;
-	AnimatedSprite hadouken;
 	AnimatedSprite ryuKO;
 	AnimatedSprite ryuV1;
 	AnimatedSprite ryuFHit;
@@ -28,8 +26,6 @@ public class Fighter {
 	AnimatedSprite ryuCrouch;
 
 	AnimatedSprite ryuCKick;
-	AnimatedSprite ryuJKick;
-
 
 	AnimatedSprite ryuIdleR;
 	AnimatedSprite ryuWalkLR;
@@ -38,8 +34,6 @@ public class Fighter {
 	AnimatedSprite ryuPunch2R;
 	AnimatedSprite ryuJumpR;
 	AnimatedSprite ryuHitR;
-	AnimatedSprite ryuHadR;
-	AnimatedSprite hadoukenR;
 	AnimatedSprite ryuKOR;
 	AnimatedSprite ryuV1R;
 	AnimatedSprite ryuFHitR;
@@ -49,7 +43,6 @@ public class Fighter {
 	AnimatedSprite ryuCrouchR;
 
 	AnimatedSprite ryuCKickR;
-	AnimatedSprite ryuJKickR;
 
 
 	private MutableInt x;
@@ -272,11 +265,6 @@ public class Fighter {
 		for(int i=0;i<clone.length;i++) {
 			clone[i].createBox();
 		}
-
-		Sprite Jk1 = new Sprite(468, 551, 468+38-1, 551+64-1, 0, 0, s);
-		Sprite Jk2 = new Sprite(510, 554, 510+64-1, 554+55-1, 0, 0, s);
-		ryuJKick = new AnimatedSprite(0, 28, false, false, new Sprite[] {Jk1, Jk2, Jk1});
-		ryuJKickR = new AnimatedSprite(0, 28, false, false, Sprite.clones(new Sprite[] {Jk1, Jk2, Jk1}));
 		
 
 		x = new MutableInt(x2);
