@@ -22,9 +22,7 @@ public class SpriteSheet {
 			e.printStackTrace();
 		}
 	}
-//	public BufferedImage getSprite(int r, int c, int width, int height) {
-//		return spriteSheet.getSubimage(c*height, r*width, width, height);
-//	}
+
 	public BufferedImage getSprite(int x, int y, int width, int height, double scalar) {
 		BufferedImage sprite = spriteSheet.getSubimage(x, y, width, height);
 		double scaledWidth = width*scalar;
