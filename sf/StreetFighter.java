@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 public class StreetFighter extends JFrame {
 	Fighter a = new Fighter(true,300,800);
 	Fighter b = new Fighter(false,1500,800);
-	
+
 	//	Queue<Integer> inputs = new LinkedList<Integer>();
 	ArrayList<Integer> pressed = new ArrayList<Integer>();
 	ArrayList<Integer> ai = new ArrayList<Integer>();
@@ -68,9 +68,42 @@ public class StreetFighter extends JFrame {
 					for(int i=pressed.size()-1;i>0;i--) {
 						if(pressed.get(i)==KeyEvent.VK_A) {
 							if(pressed.get(i-1)==KeyEvent.VK_DOWN) {
-								a.current = a.ryuCKick;
-								a.current.start();
-
+								if(a.getDirection()==1) {
+									
+									a.current = a.ryuCKick;
+									a.current.start();
+									
+								} else {		
+									a.current = a.ryuCKickR;
+									a.current.start();
+										
+								}
+							}
+						}
+						if(pressed.get(i)==KeyEvent.VK_UP) {
+							if(pressed.get(i-1)==KeyEvent.VK_LEFT) {
+								if(a.getDirection()==1) {
+									a.current = a.ryuFJump;
+									a.current.reverse2();
+									a.current.start();
+									
+								} else {		
+									a.current = a.ryuFJumpR;
+									a.current.start();
+										
+								}
+							}
+							if(pressed.get(i-1)==KeyEvent.VK_RIGHT) {
+								if(a.getDirection()==1) {
+									a.current = a.ryuFJump;
+									a.current.start();
+									
+								} else {		
+									a.current = a.ryuFJumpR;
+									a.current.reverse2();
+									a.current.start();
+										
+								}
 							}
 						}
 					}
@@ -119,9 +152,9 @@ public class StreetFighter extends JFrame {
 	public void collisions() {
 		AnimatedSprite ac = a.current;
 		AnimatedSprite bc = b.current;
-	
+
 		if(a.getDirection()==1) {
-			
+
 		}
 		Rectangle a1 = new Rectangle(ac.getSSprite().box.get(0).x+(a.getX().getInt()-150),ac.getSSprite().box.get(0).y+
 				(a.getY().getInt()-a.current.getSprite().getHeight()),
