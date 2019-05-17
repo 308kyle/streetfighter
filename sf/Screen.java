@@ -57,8 +57,10 @@ public class Screen extends JPanel {
 		g.drawRect(50, 50, 600, 50);
 		g.drawRect(950, 50, 600, 50);
 		g.fillRect(50, 50, (int)600*one.gethp()/100, 50);
-		g.fillRect(1550-(int)(600*one.gethp()/100), 50, (int)(600*one.gethp()/100), 50);
-		
+		g.fillRect(1550-(int)(600*two.gethp()/100), 50, (int)(600*two.gethp()/100), 50);
+		if(!StreetFighter.noWinner) {
+			g.drawString("Game Over", 500, 600);
+		}
 		
 
 	}
