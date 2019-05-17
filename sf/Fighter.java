@@ -60,7 +60,7 @@ public class Fighter {
 	private boolean human;
 
 	private int hp = 100;
-
+	Sprite v3;
 	public Fighter(boolean human, int x2, int y2) {
 		
 
@@ -236,7 +236,7 @@ public class Fighter {
 
 		Sprite v1 = new Sprite(6, 887, 6+44-1, 887+76-1, 0, 0, s);
 		Sprite v2 = new Sprite(57, 875, 57+44-1, 875+88-1, 0, 0, s);
-		Sprite v3 = new Sprite(108, 853, 108+44-1, 853+110-1, 0, 0, s);
+		v3 = new Sprite(108, 853, 108+44-1, 853+110-1, 0, 0, s);
 		ryuV1 = new AnimatedSprite(0, 27, false, false, new Sprite[] {v1, v2, v3});
 		clone = Sprite.clones(new Sprite[] {v1, v2, v3});
 		ryuV1R = new AnimatedSprite(0, 27, false, false, clone);
