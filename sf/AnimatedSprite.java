@@ -18,7 +18,8 @@ public class AnimatedSprite implements Cloneable {
 	private boolean stop;
 	private boolean reverse;
 	private boolean repeat;
-
+	private boolean tempreverse = false;
+	
 	public AnimatedSprite(int frameDelay, int frameDuration, boolean repeat, boolean cancel, Sprite[] a) {
 		animation = a;
 
@@ -50,6 +51,9 @@ public class AnimatedSprite implements Cloneable {
 	public void reverse() {
 		reverse = true;
 	}
+	public void reverse2() {
+		tempreverse = true;
+	}
 	public boolean update(MutableInt x, MutableInt y) {
 
 		int framespersprite = frameDuration/length;
@@ -70,12 +74,12 @@ public class AnimatedSprite implements Cloneable {
 					currentFrame = 0;
 					frameCount = frameDelay+1;
 				}
-				if(!reverse) {
+				if(!reverse&&!tempreverse) {
 					x.setInt(x.getInt()+animation[currentFrame].dx());
 					y.setInt(y.getInt()+animation[currentFrame].dy());
 				} else {
 					x.setInt(x.getInt()-animation[currentFrame].dx());
-					y.setInt(y.getInt()-animation[currentFrame].dy());
+					y.setInt(y.getInt()+animation[currentFrame].dy());
 				}
 			}
 		}
@@ -86,7 +90,7 @@ public class AnimatedSprite implements Cloneable {
 		stop = true;
 		frameCount = 0;
 		currentFrame = 0;
-		
+		tempreverse = false;
 	}
 	public BufferedImage getSprite() {
 		if(!reverse)

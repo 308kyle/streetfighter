@@ -29,7 +29,7 @@ public class Fighter {
 
 	AnimatedSprite ryuCKick;
 	AnimatedSprite ryuJKick;
-
+	AnimatedSprite ryuFJump;
 
 	AnimatedSprite ryuIdleR;
 	AnimatedSprite ryuWalkLR;
@@ -50,7 +50,7 @@ public class Fighter {
 
 	AnimatedSprite ryuCKickR;
 	AnimatedSprite ryuJKickR;
-
+	AnimatedSprite ryuFJumpR;
 
 	private MutableInt x;
 	private MutableInt y;
@@ -278,7 +278,29 @@ public class Fighter {
 		ryuJKick = new AnimatedSprite(0, 28, false, false, new Sprite[] {Jk1, Jk2, Jk1});
 		ryuJKickR = new AnimatedSprite(0, 28, false, false, Sprite.clones(new Sprite[] {Jk1, Jk2, Jk1}));
 		
-
+		
+		Sprite f1 = new Sprite(747,24,789,98,5,-20,s);
+		Sprite f2 = new Sprite(795,9,827,98,5,-16,s);
+		Sprite f3 = new Sprite(835,40,895,76,5,-4,s);
+		Sprite f4 = new Sprite(902,24,932,90,5,0,s);
+		Sprite f5 = new Sprite(942,36,1013,74,5,4,s);
+		Sprite f6 = new Sprite(1021,25,1063,98,5,16,s);
+		Sprite f7 = new Sprite(1071,9,1103,98,5,20,s);
+		f1.createBox();
+		f2.createBox();
+		f3.createBox();
+		f4.createBox();
+		f5.createBox();
+		f6.createBox();
+		f7.createBox();
+		ryuFJump = new AnimatedSprite(5,60,false,false,new Sprite[] {f1,f2,f3,f4,f5,f6,f7});
+		clone = Sprite.clones(new Sprite[] {f1,f2,f3,f4,f5,f6,f7});
+		ryuFJumpR = new AnimatedSprite(5,60,false,false,clone);
+		for(int i=0;i<clone.length;i++) {
+			clone[i].createBox();
+		}
+		
+		
 		x = new MutableInt(x2);
 		y = new MutableInt(y2);
 
