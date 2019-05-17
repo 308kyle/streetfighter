@@ -23,8 +23,8 @@ public class StreetFighter extends JFrame {
 	int[] keys = {KeyEvent.VK_A,KeyEvent.VK_S,KeyEvent.VK_D};
 
 
-	AnimatedSprite[] moves = {a.ryuCrouch,a.ryuIdle,a.ryuPunch,a.ryuPunch2,a.ryuBlock,a.ryuCKick,a.ryuFJump};
-	AnimatedSprite[] movesR = {a.ryuCrouchR,a.ryuIdleR,a.ryuPunchR,a.ryuPunch2R,a.ryuBlockR,a.ryuCKickR,a.ryuFJumpR};
+	AnimatedSprite[] moves = {a.ryuCrouch,a.ryuIdle,a.ryuPunch,a.ryuPunch2,a.ryuBlock,a.ryuCKick};
+	AnimatedSprite[] movesR = {a.ryuCrouchR,a.ryuIdleR,a.ryuPunchR,a.ryuPunch2R,a.ryuBlockR,a.ryuCKickR};
 
 
 	MutableInt timer = new MutableInt(99);
@@ -35,7 +35,7 @@ public class StreetFighter extends JFrame {
 	boolean cancellable;
 	boolean cancellable2;
 
-	boolean canMove;
+	boolean hit;
 
 	public StreetFighter() {
 		super("Street Fighter");
@@ -167,12 +167,12 @@ public class StreetFighter extends JFrame {
 				cancellable = false;
 				a.current = a.ryuKO;
 				a.current.start();
-				
+
 				b.current.reset();
 				cancellable2 = false;
 				b.current = b.ryuV1R;
 				b.current.start();
-				
+
 				if(b.current.getSSprite()==b.ryuV1R.sprites()[2]) {
 					noWinner = false;
 				}
@@ -181,7 +181,7 @@ public class StreetFighter extends JFrame {
 				cancellable = false;
 				a.current = a.ryuKOR;
 				a.current.start();
-				
+
 				b.current.reset();
 				cancellable2 = false;
 				b.current = b.ryuV1;
@@ -196,7 +196,7 @@ public class StreetFighter extends JFrame {
 				cancellable2 = false;
 				b.current = b.ryuKO;
 				b.current.start();
-				
+
 				a.current.reset();
 				cancellable = false;
 				a.current = a.ryuV1R;
@@ -209,7 +209,7 @@ public class StreetFighter extends JFrame {
 				cancellable2 = false;
 				b.current = b.ryuKOR;
 				b.current.start();
-				
+
 				a.current.reset();
 				cancellable = false;
 				a.current = a.ryuV1;
@@ -224,115 +224,63 @@ public class StreetFighter extends JFrame {
 
 		a.current.getSSprite().box.get(0).setLocation(a.getX().getInt()-150,
 				a.getY().getInt()-a.current.getSprite().getHeight());
-
-
-
 		b.current.getSSprite().box.get(0).setLocation(b.getX().getInt()-150,
 				b.getY().getInt()-b.current.getSprite().getHeight());
-
 
 		a.current.getSSprite().box.get(1).setLocation(a.getX().getInt()-a.current.getSprite().getWidth(),
 				a.getY().getInt()-a.current.getSprite().getHeight());
 		b.current.getSSprite().box.get(1).setLocation(b.getX().getInt()-b.current.getSprite().getWidth(),
 				b.getY().getInt()-b.current.getSprite().getHeight());
 
-
 		if(a.getDirection()==1) {
 			if(a.current.getSSprite().box.get(0).intersects(b.current.getSSprite().box.get(1))) {
-				if(a.current==a.ryuWalk) {
-					if(b.current==b.ryuPunchR||b.current==b.ryuPunch2R) {
+				if(a.current==a.ryuWalk||a.current==a.ryuIdle) {
+					if(b.current==b.ryuPunchR||b.current==b.ryuPunch2R&&!hit) {
 						a.current.reset();
 						a.current = a.ryuFHit;
 						a.current.start();
 						a.sethp(a.gethp()-10);
+						hit = true;
 					}
-					if(b.current==b.ryuCKickR) {
+					if(b.current==b.ryuCKickR&&!hit) {
 						a.current.reset();
 						a.current = a.ryuHit;
 						a.current.start();
 						a.sethp(a.gethp()-10);
+						hit = true;
 					}
-				}
-				if(a.current==a.ryuIdle) {
-					if(b.current==b.ryuPunchR||b.current==b.ryuPunch2R) {
-						a.current.reset();
-						a.current = a.ryuFHit;
-						a.current.start();
-						a.sethp(a.gethp()-10);
-					}
-					if(b.current==b.ryuCKickR) {
-						a.current.reset();
-						a.current = a.ryuHit;
-						a.current.start();
-						a.sethp(a.gethp()-10);
-					}
-				}
-				if(a.current==a.ryuBlock) {
+				} 
 
-					if(b.current==b.ryuCKickR) {
-						a.current.reset();
-						a.current = a.ryuHit;
-						a.current.start();
-						a.sethp(a.gethp()-10);
-					}
-				}
-				if(a.current==a.ryuCBlock) {
-
-				}
-				if(a.current==a.ryuPunch||a.current==a.ryuPunch2) {
-					if(b.current==b.ryuWalkR||b.current==b.ryuIdleR) {
+				else if(a.current==a.ryuPunch||a.current==a.ryuPunch2) {
+					if(b.current==b.ryuWalkLR||b.current==b.ryuIdleR&&!hit) {
 						b.current.reset();
 						b.current = b.ryuFHitR;
 						b.current.start();
 						b.sethp(b.gethp()-10);
-
-					}
-					if(b.current==b.ryuHitR||b.current==b.ryuFHitR) {
-						b.current.reset();
-						b.current = b.ryuFHitR;
-						b.current.start();
-						b.sethp(b.gethp()-10);
-					}
-					if(b.current==b.ryuPunchR||b.current==b.ryuPunch2R) {
-						b.current.reset();
-						a.current.reset();
-						a.current = a.ryuFHit;
-						b.current = b.ryuFHitR;
-						b.current.start();
-						a.current.start();
-						b.sethp(b.gethp()-10);
-						a.sethp(a.gethp()-10);
+						hit=true;
 					}
 				}
-				if(a.current==a.ryuCKick) {
-					if(b.current==b.ryuWalkR||b.current==b.ryuIdleR) {
+				else if(a.current==a.ryuCKick) {
+					if(b.current==b.ryuWalkR||b.current==b.ryuIdleR&&!hit) {
 						b.current.reset();
 						b.current = b.ryuHitR;
 						b.current.start();
 						b.sethp(b.gethp()-10);
-					}
-					if(b.current==b.ryuHitR||b.current==b.ryuFHitR) {
-						b.current.reset();
-						b.current = b.ryuFHitR;
-						b.current.start();
-						b.sethp(b.gethp()-10);
-					}
-					if(b.current==b.ryuBlockR) {
-						b.current.reset();
-						b.current = b.ryuHitR;
-						b.current.start();
-						b.sethp(b.gethp()-10);
+						hit=true;
 					}
 				}
 				if(a.current==a.ryuCrouch) {
-
-					if(b.current==b.ryuCKickR) {
+					if(b.current==b.ryuCKickR&&!hit) {
 						a.current.reset();
 						a.current = a.ryuHit;
 						a.current.start();
 						a.sethp(a.gethp()-10);
+						hit = true;
 					}
 				}
+			} 
+			else {
+				hit = false;
 			}
 		}
 		if(a.getDirection()==-1) {
@@ -442,6 +390,7 @@ public class StreetFighter extends JFrame {
 				}
 			}
 		}
+
 	}
 	public void move() {
 
@@ -510,8 +459,8 @@ public class StreetFighter extends JFrame {
 					a.current = a.ryuIdleR;
 					a.current.start();
 				}
-				cancellable = a.current.update(a.getX(), a.getY(), canMove);
-				cancellable2 = b.current.update(b.getX(), b.getY(), canMove);
+				cancellable = a.current.update(a.getX(), a.getY());
+				cancellable2 = b.current.update(b.getX(), b.getY());
 
 				a.setDirection(b.getX().getInt());
 				b.setDirection(a.getX().getInt());
