@@ -22,11 +22,11 @@ public class StreetFighter extends JFrame {
 	//	Set<Integer> pressed = new HashSet<Integer>();
 	int[] keys = {KeyEvent.VK_A,KeyEvent.VK_S,KeyEvent.VK_D};
 
-	
+
 	AnimatedSprite[] moves = {a.ryuCrouch,a.ryuIdle,a.ryuPunch,a.ryuPunch2,a.ryuBlock,a.ryuCKick,a.ryuFJump};
 	AnimatedSprite[] movesR = {a.ryuCrouchR,a.ryuIdleR,a.ryuPunchR,a.ryuPunch2R,a.ryuBlockR,a.ryuCKickR,a.ryuFJumpR};
 
-	
+
 	MutableInt timer = new MutableInt(99);
 
 	int lastFrame = 0;
@@ -36,7 +36,7 @@ public class StreetFighter extends JFrame {
 	boolean cancellable2;
 
 	boolean canMove;
-	
+
 	public StreetFighter() {
 		super("Street Fighter");
 
@@ -70,49 +70,51 @@ public class StreetFighter extends JFrame {
 					System.exit(0);
 				}
 				if(pressed.size()>1) {
-					for(int i=pressed.size()-1;i>0;i--) {
-						if(pressed.get(i)==KeyEvent.VK_A) {
-							if(pressed.get(i-1)==KeyEvent.VK_DOWN) {
+					if(cancellable) {
+						for(int i=pressed.size()-1;i>0;i--) {
+							if(pressed.get(i)==KeyEvent.VK_A) {
+								if(pressed.get(i-1)==KeyEvent.VK_DOWN) {
 
-								if(a.getDirection()==1) {
-									
-									a.current = a.ryuCKick;
-									a.current.start();
-									
-								} else {		
-									a.current = a.ryuCKickR;
-									a.current.reverse2();
-									a.current.start();
-										
+									if(a.getDirection()==1) {
+
+										a.current = a.ryuCKick;
+										a.current.start();
+
+									} else {		
+										a.current = a.ryuCKickR;
+										a.current.reverse2();
+										a.current.start();
+
+									}
 								}
 							}
-						}
-						if(pressed.get(i)==KeyEvent.VK_UP) {
-							if(pressed.get(i-1)==KeyEvent.VK_LEFT) {
-								if(a.getDirection()==1) {
-									a.current = a.ryuFJump;
-									a.current.reverse2();
-									a.current.start();
-									
-								} else {		
-									a.current = a.ryuFJumpR;
-									a.current.reverse2();
-									a.current.start();
-										
-								}
-							}
-							if(pressed.get(i-1)==KeyEvent.VK_RIGHT) {
-								if(a.getDirection()==1) {
-									a.current = a.ryuFJump;
-									a.current.start();
-									
-								} else {		
-									a.current = a.ryuFJumpR;
-								
-									a.current.start();
-										
-								}
+							if(pressed.get(i)==KeyEvent.VK_UP) {
+								if(pressed.get(i-1)==KeyEvent.VK_LEFT) {
+									if(a.getDirection()==1) {
+										a.current = a.ryuFJump;
+										a.current.reverse2();
+										a.current.start();
 
+									} else {		
+										a.current = a.ryuFJumpR;
+										a.current.reverse2();
+										a.current.start();
+
+									}
+								}
+								if(pressed.get(i-1)==KeyEvent.VK_RIGHT) {
+									if(a.getDirection()==1) {
+										a.current = a.ryuFJump;
+										a.current.start();
+
+									} else {		
+										a.current = a.ryuFJumpR;
+
+										a.current.start();
+
+									}
+
+								}
 							}
 						}
 					}
@@ -220,17 +222,15 @@ public class StreetFighter extends JFrame {
 	}
 	public void collisions() {	
 
-		canMove = true;
-		
 		a.current.getSSprite().box.get(0).setLocation(a.getX().getInt()-150,
 				a.getY().getInt()-a.current.getSprite().getHeight());
-	
 
-		
+
+
 		b.current.getSSprite().box.get(0).setLocation(b.getX().getInt()-150,
 				b.getY().getInt()-b.current.getSprite().getHeight());
-	
-		
+
+
 		a.current.getSSprite().box.get(1).setLocation(a.getX().getInt()-a.current.getSprite().getWidth(),
 				a.getY().getInt()-a.current.getSprite().getHeight());
 		b.current.getSSprite().box.get(1).setLocation(b.getX().getInt()-b.current.getSprite().getWidth(),
@@ -240,13 +240,7 @@ public class StreetFighter extends JFrame {
 		if(a.getDirection()==1) {
 			if(a.current.getSSprite().box.get(0).intersects(b.current.getSSprite().box.get(1))) {
 				if(a.current==a.ryuWalk) {
-					//System.out.println(b.current==b.ryuWalkLR);
-					if(b.current==b.ryuIdleR||b.current==b.ryuBlockR||b.current==b.ryuCBlockR||b.current==b.ryuCrouchR||b.current==b.ryuWalkLR) {
-						canMove = false;
-					}
-					
 					if(b.current==b.ryuPunchR||b.current==b.ryuPunch2R) {
-						System.out.println(a.gethp());
 						a.current.reset();
 						a.current = a.ryuFHit;
 						a.current.start();
@@ -260,9 +254,6 @@ public class StreetFighter extends JFrame {
 					}
 				}
 				if(a.current==a.ryuIdle) {
-					if(b.current==b.ryuWalkR) {
-						b.setX((b.getX().getInt()-b.current.getSprite().getWidth())+b.current.getSSprite().dx());
-					}
 					if(b.current==b.ryuPunchR||b.current==b.ryuPunch2R) {
 						a.current.reset();
 						a.current = a.ryuFHit;
@@ -277,9 +268,7 @@ public class StreetFighter extends JFrame {
 					}
 				}
 				if(a.current==a.ryuBlock) {
-					if(b.current==b.ryuWalkR) {
-						b.setX((b.getX().getInt()-b.current.getSprite().getWidth())+b.current.getSSprite().dx());
-					}
+
 					if(b.current==b.ryuCKickR) {
 						a.current.reset();
 						a.current = a.ryuHit;
@@ -288,9 +277,7 @@ public class StreetFighter extends JFrame {
 					}
 				}
 				if(a.current==a.ryuCBlock) {
-					if(b.current==b.ryuWalkR) {
-						b.setX((b.getX().getInt()-b.current.getSprite().getWidth())+b.current.getSSprite().dx());
-					}
+
 				}
 				if(a.current==a.ryuPunch||a.current==a.ryuPunch2) {
 					if(b.current==b.ryuWalkR||b.current==b.ryuIdleR) {
@@ -298,7 +285,6 @@ public class StreetFighter extends JFrame {
 						b.current = b.ryuFHitR;
 						b.current.start();
 						b.sethp(b.gethp()-10);
-
 
 					}
 					if(b.current==b.ryuHitR||b.current==b.ryuFHitR) {
@@ -339,9 +325,7 @@ public class StreetFighter extends JFrame {
 					}
 				}
 				if(a.current==a.ryuCrouch) {
-					if(b.current==b.ryuWalkR) {
-						b.setX((b.getX().getInt()-b.current.getSprite().getWidth())+b.current.getSSprite().dx());
-					}
+
 					if(b.current==b.ryuCKickR) {
 						a.current.reset();
 						a.current = a.ryuHit;
@@ -354,6 +338,7 @@ public class StreetFighter extends JFrame {
 		if(a.getDirection()==-1) {
 			if(a.current.getSSprite().box.get(1).intersects(b.current.getSSprite().box.get(0))) {
 				if(a.current==a.ryuWalkR) {
+
 					if(b.current==b.ryuIdle||b.current==b.ryuBlock||b.current==b.ryuCBlock||b.current==b.ryuCrouch||b.current==b.ryuJump) {
 						a.setX((a.getX().getInt()-a.current.getSprite().getWidth())+a.current.getSSprite().dx());
 					}
@@ -361,6 +346,7 @@ public class StreetFighter extends JFrame {
 						a.setX((a.getX().getInt()-a.current.getSprite().getWidth())+a.current.getSSprite().dx());
 						b.setX((b.getX().getInt()-150)-b.current.getSSprite().dx());
 					}
+
 					if(b.current==b.ryuPunch||b.current==b.ryuPunch2) {
 						a.current.reset();
 						a.current = a.ryuFHitR;
@@ -375,9 +361,7 @@ public class StreetFighter extends JFrame {
 					}
 				}
 				else if(a.current==a.ryuIdleR) {
-					if(b.current==b.ryuWalk) {
-						b.setX((b.getX().getInt()-150)-b.current.getSSprite().dx());
-					}
+
 					if(b.current==b.ryuPunch||b.current==b.ryuPunch2) {
 						a.current.reset();
 						a.current = a.ryuFHitR;
@@ -392,9 +376,7 @@ public class StreetFighter extends JFrame {
 					}
 				}
 				else if(a.current==a.ryuBlockR) {
-					if(b.current==b.ryuWalk) {
-						b.setX((b.getX().getInt()-150)-b.current.getSSprite().dx());
-					}
+
 					if(b.current==b.ryuCKick) {
 						a.current.reset();
 						a.current = a.ryuHitR;
@@ -403,9 +385,7 @@ public class StreetFighter extends JFrame {
 					}
 				}
 				else if(a.current==a.ryuCBlockR) {
-					if(b.current==b.ryuWalk) {
-						b.setX((b.getX().getInt()-150)+b.current.getSSprite().dx());
-					}
+
 				}
 				else if(a.current==a.ryuPunchR||a.current==a.ryuPunch2R) {
 					if(b.current==b.ryuWalk||b.current==b.ryuIdle) {
@@ -452,9 +432,7 @@ public class StreetFighter extends JFrame {
 					}
 				}
 				else if(a.current==a.ryuCrouchR) {
-					if(b.current==b.ryuWalk) {
-						b.setX((b.getX().getInt()-150)-b.current.getSSprite().dx());
-					}
+
 					if(b.current==b.ryuCKick) {
 						a.current.reset();
 						a.current = a.ryuHitR;
@@ -466,7 +444,7 @@ public class StreetFighter extends JFrame {
 		}
 	}
 	public void move() {
-		
+
 		if(b.current.stopped()) {
 			if(a.getDirection()==-1) {
 				b.current = b.ryuIdle;
@@ -505,7 +483,7 @@ public class StreetFighter extends JFrame {
 		} else {
 			b.current = b.ryuIdleR;
 			b.current.start();
-			
+
 		}
 	}
 	public void gameLoop(Screen s, MutableInt frames) {
