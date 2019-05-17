@@ -46,7 +46,7 @@ public class Screen extends JPanel {
 		
 		g.setFont(new Font("Times New Roman", Font.BOLD, 36));
 		g.setColor(Color.yellow);
-		g.drawString(""+timer.getInt(), (d.width/2)-25, 90);
+		g.drawString(""+timer.getInt(), 700, 90);
 		
 
 		g.setColor(Color.MAGENTA);
@@ -58,7 +58,7 @@ public class Screen extends JPanel {
 		g.drawRect(950, 50, 600, 50);
 		g.fillRect(50, 50, (int)600*one.gethp()/100, 50);
 		g.fillRect(1550-(int)(600*two.gethp()/100), 50, (int)(600*two.gethp()/100), 50);
-		if(!StreetFighter.noWinner) {
+		if(StreetFighter.winner) {
 			g.drawString("Game Over", 500, 600);
 		}
 		
