@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 public class StreetFighter extends JFrame {
 	Fighter a = new Fighter(true,300,800);
 	Fighter b = new Fighter(false,1500,800);
-
+	public static boolean noWinner = true;
 	//	Queue<Integer> inputs = new LinkedList<Integer>();
 	ArrayList<Integer> pressed = new ArrayList<Integer>();
 	ArrayList<Integer> ai = new ArrayList<Integer>();
@@ -442,8 +442,7 @@ public class StreetFighter extends JFrame {
 		long last_time = System.currentTimeMillis();
 		long target_time = last_time + targetMillis;
 
-
-		while(timer.getInt()>0) {
+		while(timer.getInt()>0 || noWinner) {
 			long current = System.currentTimeMillis();
 			if(current>=target_time) {
 				if(frames.getInt()==60) {

@@ -378,7 +378,9 @@ public class Fighter {
 		return hp;
 	}
 	public void sethp(int newhp) {
-		hp = newhp;
+		if(newhp>=0) {
+			hp = newhp;
+		}
 	}
 
 	public void draw(Graphics g) {
