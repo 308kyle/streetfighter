@@ -72,7 +72,6 @@ public class Sprite {
 	public static BufferedImage copyImage(BufferedImage source){
 	    BufferedImage b = new BufferedImage(source.getWidth(), source.getHeight(), source.getType());
 	    Graphics2D g = b.createGraphics();
-	    //Graphics g = b.getGraphics();
 	    g.drawImage(source, 0, 0, null);
 	    g.dispose();
 	    return b;
@@ -103,7 +102,7 @@ public class Sprite {
 		box.add(b);
 	}
 	public void createBox() {
-		box.add(new Rectangle(w, h));
+		box.add(new Rectangle(w*4, h*4));
 	}
 	
 }
