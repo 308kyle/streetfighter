@@ -383,10 +383,18 @@ public class Fighter {
 
 	public void draw(Graphics g) {
 		if(direction==1) {
+			
 			g.drawImage(current.getSprite(), x.getInt()-150, y.getInt()-current.getSprite().getHeight(), null);
+			
+			g.drawRect(current.getSSprite().box.get(0).x, current.getSSprite().box.get(0).y, current.getSSprite().box.get(0).width, current.getSSprite().box.get(0).height);
+
 		} else {
 			g.drawImage(current.getSprite(), x.getInt()-current.getSprite().getWidth(), y.getInt()-current.getSprite().getHeight(), null);
+			g.drawRect(current.getSSprite().box.get(1).x, current.getSSprite().box.get(1).y, current.getSSprite().box.get(1).width, current.getSSprite().box.get(1).height);
+			
 		}
+		
+		
 		g.setFont(new Font( "", Font.BOLD, 36));
 		g.setColor(Color.RED);
 		if(human) {

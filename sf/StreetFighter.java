@@ -1,6 +1,5 @@
 package sf;
 
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -23,7 +22,11 @@ public class StreetFighter extends JFrame {
 	//	Set<Integer> pressed = new HashSet<Integer>();
 	int[] keys = {KeyEvent.VK_A,KeyEvent.VK_S,KeyEvent.VK_D};
 
+	
+	AnimatedSprite[] moves = {a.ryuCrouch,a.ryuIdle,a.ryuPunch,a.ryuPunch2,a.ryuBlock,a.ryuCKick,a.ryuFJump};
+	AnimatedSprite[] movesR = {a.ryuCrouchR,a.ryuIdleR,a.ryuPunchR,a.ryuPunch2R,a.ryuBlockR,a.ryuCKickR,a.ryuFJumpR};
 
+	
 	MutableInt timer = new MutableInt(99);
 
 	int lastFrame = 0;
@@ -32,6 +35,8 @@ public class StreetFighter extends JFrame {
 	boolean cancellable;
 	boolean cancellable2;
 
+	boolean canMove;
+	
 	public StreetFighter() {
 		super("Street Fighter");
 
@@ -153,233 +158,234 @@ public class StreetFighter extends JFrame {
 			}
 		}.start();
 	}
-	public void collisions() {
-		AnimatedSprite ac = a.current;
-		AnimatedSprite bc = b.current;
+	public void collisions() {	
 
-		//facing right
-		ac.getSSprite().box.get(0).setLocation(a.getX().getInt()-150,
+		canMove = true;
+		
+		a.current.getSSprite().box.get(0).setLocation(a.getX().getInt()-150,
 				a.getY().getInt()-a.current.getSprite().getHeight());
-		bc.getSSprite().box.get(0).setLocation(b.getX().getInt()-150,
+	
+
+		
+		b.current.getSSprite().box.get(0).setLocation(b.getX().getInt()-150,
 				b.getY().getInt()-b.current.getSprite().getHeight());
-
-
-		//facing left
-		ac.getSSprite().box.get(1).setLocation(a.getX().getInt()-a.current.getSprite().getWidth(),
+	
+		
+		a.current.getSSprite().box.get(1).setLocation(a.getX().getInt()-a.current.getSprite().getWidth(),
 				a.getY().getInt()-a.current.getSprite().getHeight());
-		bc.getSSprite().box.get(1).setLocation(b.getX().getInt()-b.current.getSprite().getWidth(),
+		b.current.getSSprite().box.get(1).setLocation(b.getX().getInt()-b.current.getSprite().getWidth(),
 				b.getY().getInt()-b.current.getSprite().getHeight());
 
 
 		if(a.getDirection()==1) {
-			if(ac.getSSprite().box.get(0).intersects(bc.getSSprite().box.get(1))) {
-				if(ac==a.ryuWalk) {
-					if(bc==b.ryuIdleR||bc==b.ryuBlockR||bc==b.ryuCBlockR||bc==b.ryuCrouchR) {
-						a.setX((a.getX().getInt()-150)-ac.getSSprite().dx());
+			if(a.current.getSSprite().box.get(0).intersects(b.current.getSSprite().box.get(1))) {
+				if(a.current==a.ryuWalk) {
+					//System.out.println(b.current==b.ryuWalkLR);
+					if(b.current==b.ryuIdleR||b.current==b.ryuBlockR||b.current==b.ryuCBlockR||b.current==b.ryuCrouchR||b.current==b.ryuWalkLR) {
+						canMove = false;
 					}
-					if(bc==b.ryuWalkR) {
-						a.setX((a.getX().getInt()-150)-ac.getSSprite().dx());
-						b.setX((b.getX().getInt()-b.current.getSprite().getWidth())+bc.getSSprite().dx());
-					}
-					if(bc==b.ryuPunchR||bc==b.ryuPunch2R) {
-						ac.reset();
-						ac = a.ryuFHit;
-						ac.start();
+					
+					if(b.current==b.ryuPunchR||b.current==b.ryuPunch2R) {
+						a.current.reset();
+						a.current = a.ryuFHit;
+						a.current.start();
 						a.sethp(a.gethp()-10);
 					}
-					if(bc==b.ryuCKickR) {
-						ac.reset();
-						ac = a.ryuHit;
-						ac.start();
-						a.sethp(a.gethp()-10);
-					}
-				}
-				if(ac==a.ryuIdle) {
-					if(bc==b.ryuWalkR) {
-						b.setX((b.getX().getInt()-b.current.getSprite().getWidth())+bc.getSSprite().dx());
-					}
-					if(bc==b.ryuPunchR||bc==b.ryuPunch2R) {
-						ac.reset();
-						ac = a.ryuFHit;
-						ac.start();
-						a.sethp(a.gethp()-10);
-					}
-					if(bc==b.ryuCKickR) {
-						ac.reset();
-						ac = a.ryuHit;
-						ac.start();
+					if(b.current==b.ryuCKickR) {
+						a.current.reset();
+						a.current = a.ryuHit;
+						a.current.start();
 						a.sethp(a.gethp()-10);
 					}
 				}
-				if(ac==a.ryuBlock) {
-					if(bc==b.ryuWalkR) {
-						b.setX((b.getX().getInt()-b.current.getSprite().getWidth())+bc.getSSprite().dx());
+				if(a.current==a.ryuIdle) {
+					if(b.current==b.ryuWalkR) {
+						b.setX((b.getX().getInt()-b.current.getSprite().getWidth())+b.current.getSSprite().dx());
 					}
-					if(bc==b.ryuCKickR) {
-						ac.reset();
-						ac = a.ryuHit;
-						ac.start();
+					if(b.current==b.ryuPunchR||b.current==b.ryuPunch2R) {
+						a.current.reset();
+						a.current = a.ryuFHit;
+						a.current.start();
+						a.sethp(a.gethp()-10);
+					}
+					if(b.current==b.ryuCKickR) {
+						a.current.reset();
+						a.current = a.ryuHit;
+						a.current.start();
 						a.sethp(a.gethp()-10);
 					}
 				}
-				if(ac==a.ryuCBlock) {
-					if(bc==b.ryuWalkR) {
-						b.setX((b.getX().getInt()-b.current.getSprite().getWidth())+bc.getSSprite().dx());
+				if(a.current==a.ryuBlock) {
+					if(b.current==b.ryuWalkR) {
+						b.setX((b.getX().getInt()-b.current.getSprite().getWidth())+b.current.getSSprite().dx());
+					}
+					if(b.current==b.ryuCKickR) {
+						a.current.reset();
+						a.current = a.ryuHit;
+						a.current.start();
+						a.sethp(a.gethp()-10);
 					}
 				}
-				if(ac==a.ryuPunch||ac==a.ryuPunch2) {
-					if(bc==b.ryuWalkR||bc==b.ryuIdleR) {
-						bc.reset();
-						bc = b.ryuFHitR;
-						bc.start();
+				if(a.current==a.ryuCBlock) {
+					if(b.current==b.ryuWalkR) {
+						b.setX((b.getX().getInt()-b.current.getSprite().getWidth())+b.current.getSSprite().dx());
+					}
+				}
+				if(a.current==a.ryuPunch||a.current==a.ryuPunch2) {
+					if(b.current==b.ryuWalkR||b.current==b.ryuIdleR) {
+						b.current.reset();
+						b.current = b.ryuFHitR;
+						b.current.start();
+						b.sethp(b.gethp()-10);
+						System.out.println("b");
+
+					}
+					if(b.current==b.ryuHitR||b.current==b.ryuFHitR) {
+						b.current.reset();
+						b.current = b.ryuFHitR;
+						b.current.start();
 						b.sethp(b.gethp()-10);
 					}
-					if(bc==b.ryuHitR||bc==b.ryuFHitR) {
-						bc.reset();
-						bc = b.ryuFHitR;
-						bc.start();
-						b.sethp(b.gethp()-10);
-					}
-					if(bc==b.ryuPunchR||bc==b.ryuPunch2R) {
-						bc.reset();
-						ac.reset();
-						ac = a.ryuFHit;
-						bc = b.ryuFHitR;
-						bc.start();
-						ac.start();
+					if(b.current==b.ryuPunchR||b.current==b.ryuPunch2R) {
+						b.current.reset();
+						a.current.reset();
+						a.current = a.ryuFHit;
+						b.current = b.ryuFHitR;
+						b.current.start();
+						a.current.start();
 						b.sethp(b.gethp()-10);
 						a.sethp(a.gethp()-10);
 					}
 				}
-				if(ac==a.ryuCKick) {
-					if(bc==b.ryuWalkR||bc==b.ryuIdleR) {
-						bc.reset();
-						bc = b.ryuHitR;
-						bc.start();
+				if(a.current==a.ryuCKick) {
+					if(b.current==b.ryuWalkR||b.current==b.ryuIdleR) {
+						b.current.reset();
+						b.current = b.ryuHitR;
+						b.current.start();
 						b.sethp(b.gethp()-10);
 					}
-					if(bc==b.ryuHitR||bc==b.ryuFHitR) {
-						bc.reset();
-						bc = b.ryuFHitR;
-						bc.start();
+					if(b.current==b.ryuHitR||b.current==b.ryuFHitR) {
+						b.current.reset();
+						b.current = b.ryuFHitR;
+						b.current.start();
 						b.sethp(b.gethp()-10);
 					}
 				}
-				if(ac==a.ryuCrouch) {
-					if(bc==b.ryuWalkR) {
-						b.setX((b.getX().getInt()-b.current.getSprite().getWidth())+bc.getSSprite().dx());
+				if(a.current==a.ryuCrouch) {
+					if(b.current==b.ryuWalkR) {
+						b.setX((b.getX().getInt()-b.current.getSprite().getWidth())+b.current.getSSprite().dx());
 					}
-					if(bc==b.ryuCKickR) {
-						ac.reset();
-						ac = a.ryuHit;
-						ac.start();
+					if(b.current==b.ryuCKickR) {
+						a.current.reset();
+						a.current = a.ryuHit;
+						a.current.start();
 						a.sethp(a.gethp()-10);
 					}
 				}
 			}
 		}
 		if(a.getDirection()==-1) {
-			if(ac.getSSprite().box.get(1).intersects(bc.getSSprite().box.get(0))) {
-				if(ac==a.ryuWalkR) {
-					if(bc==b.ryuIdle||bc==b.ryuBlock||bc==b.ryuCBlock||bc==b.ryuCrouch) {
-						a.setX((a.getX().getInt()-a.current.getSprite().getWidth())+ac.getSSprite().dx());
+			if(a.current.getSSprite().box.get(1).intersects(b.current.getSSprite().box.get(0))) {
+				if(a.current==a.ryuWalkR) {
+					if(b.current==b.ryuIdle||b.current==b.ryuBlock||b.current==b.ryuCBlock||b.current==b.ryuCrouch) {
+						a.setX((a.getX().getInt()-a.current.getSprite().getWidth())+a.current.getSSprite().dx());
 					}
-					if(bc==b.ryuWalk) {
-						a.setX((a.getX().getInt()-a.current.getSprite().getWidth())+ac.getSSprite().dx());
-						b.setX((b.getX().getInt()-150)-bc.getSSprite().dx());
+					if(b.current==b.ryuWalk) {
+						a.setX((a.getX().getInt()-a.current.getSprite().getWidth())+a.current.getSSprite().dx());
+						b.setX((b.getX().getInt()-150)-b.current.getSSprite().dx());
 					}
-					if(bc==b.ryuPunch||bc==b.ryuPunch2) {
-						ac.reset();
-						ac = a.ryuFHitR;
-						ac.start();
+					if(b.current==b.ryuPunch||b.current==b.ryuPunch2) {
+						a.current.reset();
+						a.current = a.ryuFHitR;
+						a.current.start();
 						a.sethp(a.gethp()-10);
 					}
-					if(bc==b.ryuCKick) {
-						ac.reset();
-						ac = a.ryuHitR;
-						ac.start();
-						a.sethp(a.gethp()-10);
-					}
-				}
-				if(ac==a.ryuIdleR) {
-					if(bc==b.ryuWalk) {
-						b.setX((b.getX().getInt()-150)-bc.getSSprite().dx());
-					}
-					if(bc==b.ryuPunch||bc==b.ryuPunch2) {
-						ac.reset();
-						ac = a.ryuFHitR;
-						ac.start();
-						a.sethp(a.gethp()-10);
-					}
-					if(bc==b.ryuCKick) {
-						ac.reset();
-						ac = a.ryuHitR;
-						ac.start();
+					if(b.current==b.ryuCKick) {
+						a.current.reset();
+						a.current = a.ryuHitR;
+						a.current.start();
 						a.sethp(a.gethp()-10);
 					}
 				}
-				if(ac==a.ryuBlockR) {
-					if(bc==b.ryuWalk) {
-						b.setX((b.getX().getInt()-150)-bc.getSSprite().dx());
+				else if(a.current==a.ryuIdleR) {
+					if(b.current==b.ryuWalk) {
+						b.setX((b.getX().getInt()-150)-b.current.getSSprite().dx());
 					}
-					if(bc==b.ryuCKick) {
-						ac.reset();
-						ac = a.ryuHitR;
-						ac.start();
+					if(b.current==b.ryuPunch||b.current==b.ryuPunch2) {
+						a.current.reset();
+						a.current = a.ryuFHitR;
+						a.current.start();
+						a.sethp(a.gethp()-10);
+					}
+					if(b.current==b.ryuCKick) {
+						a.current.reset();
+						a.current = a.ryuHitR;
+						a.current.start();
 						a.sethp(a.gethp()-10);
 					}
 				}
-				if(ac==a.ryuCBlockR) {
-					if(bc==b.ryuWalk) {
-						b.setX((b.getX().getInt()-150)+bc.getSSprite().dx());
+				else if(a.current==a.ryuBlockR) {
+					if(b.current==b.ryuWalk) {
+						b.setX((b.getX().getInt()-150)-b.current.getSSprite().dx());
+					}
+					if(b.current==b.ryuCKick) {
+						a.current.reset();
+						a.current = a.ryuHitR;
+						a.current.start();
+						a.sethp(a.gethp()-10);
 					}
 				}
-				if(ac==a.ryuPunchR||ac==a.ryuPunch2R) {
-					if(bc==b.ryuWalk||bc==b.ryuIdle) {
-						bc.reset();
-						bc = b.ryuFHit;
-						bc.start();
+				else if(a.current==a.ryuCBlockR) {
+					if(b.current==b.ryuWalk) {
+						b.setX((b.getX().getInt()-150)+b.current.getSSprite().dx());
+					}
+				}
+				else if(a.current==a.ryuPunchR||a.current==a.ryuPunch2R) {
+					if(b.current==b.ryuWalk||b.current==b.ryuIdle) {
+						b.current.reset();
+						b.current = b.ryuFHit;
+						b.current.start();
 						b.sethp(b.gethp()-10);
 					}
-					if(bc==b.ryuHit||bc==b.ryuFHit) {
-						bc.reset();
-						bc = b.ryuFHit;
-						bc.start();
+					if(b.current==b.ryuHit||b.current==b.ryuFHit) {
+						b.current.reset();
+						b.current = b.ryuFHit;
+						b.current.start();
 						b.sethp(b.gethp()-10);
 					}
-					if(bc==b.ryuPunch||bc==b.ryuPunch2) {
-						bc.reset();
-						ac.reset();
-						ac = a.ryuFHitR;
-						bc = b.ryuFHit;
-						bc.start();
-						ac.start();
+					if(b.current==b.ryuPunch||b.current==b.ryuPunch2) {
+						b.current.reset();
+						a.current.reset();
+						a.current = a.ryuFHitR;
+						b.current = b.ryuFHit;
+						b.current.start();
+						a.current.start();
 						b.sethp(b.gethp()-10);
 						a.sethp(a.gethp()-10);
 					}
 				}
-				if(ac==a.ryuCKickR) {
-					if(bc==b.ryuWalk||bc==b.ryuIdle) {
-						bc.reset();
-						bc = b.ryuHit;
-						bc.start();
+				else if(a.current==a.ryuCKickR) {
+					if(b.current==b.ryuWalk||b.current==b.ryuIdle) {
+						b.current.reset();
+						b.current = b.ryuHit;
+						b.current.start();
 						b.sethp(b.gethp()-10);
 					}
-					if(bc==b.ryuHit||bc==b.ryuFHit) {
-						bc.reset();
-						bc = b.ryuFHit;
-						bc.start();
+					if(b.current==b.ryuHit||b.current==b.ryuFHit) {
+						b.current.reset();
+						b.current = b.ryuFHit;
+						b.current.start();
 						b.sethp(b.gethp()-10);
 					}
 				}
-				if(ac==a.ryuCrouchR) {
-					if(bc==b.ryuWalk) {
-						b.setX((b.getX().getInt()-150)-bc.getSSprite().dx());
+				else if(a.current==a.ryuCrouchR) {
+					if(b.current==b.ryuWalk) {
+						b.setX((b.getX().getInt()-150)-b.current.getSSprite().dx());
 					}
-					if(bc==b.ryuCKick) {
-						ac.reset();
-						ac = a.ryuHitR;
-						ac.start();
+					if(b.current==b.ryuCKick) {
+						a.current.reset();
+						a.current = a.ryuHitR;
+						a.current.start();
 						a.sethp(a.gethp()-10);
 					}
 				}
@@ -387,6 +393,7 @@ public class StreetFighter extends JFrame {
 		}
 	}
 	public void move() {
+		
 		if(b.current.stopped()) {
 			if(a.getDirection()==-1) {
 				b.current = b.ryuIdle;
@@ -395,7 +402,7 @@ public class StreetFighter extends JFrame {
 			}
 			b.current.start();
 		}
-		if(timer.getInt()<97) {
+		if(timer.getInt()<90) {
 			if(a.getX().getInt()-b.getX().getInt()<-200) {
 				count++;
 				if(count>45) {
@@ -408,14 +415,14 @@ public class StreetFighter extends JFrame {
 				}
 			} else {
 				count = 0;
-				int k = (int) (Math.random()*keys.length);
+				int k = (int) (Math.random()*moves.length);
 				if(cancellable2) {
 					b.current.reset();
 					if(a.getDirection() == -1) {
-						b.current = map.get(keys[k]); 
+						b.current = moves[k]; 
 					}
 					else if(a.getDirection() == 1) {
-						b.current = mapR.get(keys[k]); 
+						b.current = movesR[k]; 
 					}
 				}
 			}
@@ -425,6 +432,7 @@ public class StreetFighter extends JFrame {
 		} else {
 			b.current = b.ryuIdleR;
 			b.current.start();
+			
 		}
 	}
 	public void gameLoop(Screen s, MutableInt frames) {
@@ -452,8 +460,8 @@ public class StreetFighter extends JFrame {
 					a.current = a.ryuIdleR;
 					a.current.start();
 				}
-				cancellable = a.current.update(a.getX(), a.getY());
-				cancellable2 = b.current.update(b.getX(), b.getY());
+				cancellable = a.current.update(a.getX(), a.getY(), canMove);
+				cancellable2 = b.current.update(b.getX(), b.getY(), canMove);
 
 				a.setDirection(b.getX().getInt());
 				b.setDirection(a.getX().getInt());
