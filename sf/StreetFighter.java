@@ -45,7 +45,6 @@ public class StreetFighter extends JFrame {
 		map.put(KeyEvent.VK_S, a.ryuPunch2);
 		map.put(KeyEvent.VK_D, a.ryuBlock);
 
-
 		mapR.put(KeyEvent.VK_LEFT, a.ryuWalkLR);
 		mapR.put(KeyEvent.VK_RIGHT, a.ryuWalkR);
 		mapR.put(KeyEvent.VK_UP, a.ryuJumpR);
@@ -71,7 +70,6 @@ public class StreetFighter extends JFrame {
 						for(int i=pressed.size()-1;i>0;i--) {
 							if(pressed.get(i)==KeyEvent.VK_A) {
 								if(pressed.get(i-1)==KeyEvent.VK_DOWN) {
-
 									if(a.getDirection()==1) {
 
 										a.current = a.ryuCKick;
@@ -106,11 +104,9 @@ public class StreetFighter extends JFrame {
 
 									} else {		
 										a.current = a.ryuFJumpR;
-
 										a.current.start();
 
 									}
-
 								}
 							}
 						}
@@ -168,9 +164,6 @@ public class StreetFighter extends JFrame {
 
 	public void collisions() {	
 
-		//make sure no jumping
-		//
-
 		a.current.getSSprite().box.get(0).setLocation(a.getX().getInt()-150,
 				a.getY().getInt()-a.current.getSprite().getHeight());
 		b.current.getSSprite().box.get(0).setLocation(b.getX().getInt()-150,
@@ -206,8 +199,8 @@ public class StreetFighter extends JFrame {
 						}
 
 					} 
-					else if(b.current==a.ryuPunchR||b.current==a.ryuPunch2R||b.current==a.ryuCKickR&&!hit) {
-						if(a.current!=a.ryuBlock&&!hit) {
+					else if(b.current==a.ryuPunchR||b.current==a.ryuPunch2R||b.current==a.ryuCKickR) {
+						if((a.current!=a.ryuBlock)&&!hit) {
 							a.current.reset();
 							a.current = a.ryuFHit;
 							a.current.start();
@@ -227,7 +220,7 @@ public class StreetFighter extends JFrame {
 				if(a.current!=a.ryuJumpR&&a.current!=a.ryuFJumpR&&b.current!=a.ryuJump&&b.current!=a.ryuFJump) {
 
 					if(a.current==a.ryuPunchR||a.current==a.ryuPunch2R||a.current == a.ryuCKickR) {
-						if(b.current==b.ryuPunch||b.current==b.ryuPunch2||b.current==b.ryuCKick) {
+						if(b.current==b.ryuPunch||b.current==b.ryuPunch2||b.current==b.ryuCKick&&!hit) {
 							a.current.reset();
 							a.current = a.ryuFHitR;
 							a.current.start();
@@ -245,6 +238,7 @@ public class StreetFighter extends JFrame {
 							a.current = a.ryuFHitR;
 							a.current.start();
 							a.sethp(a.gethp()-10);
+							hit = true;
 						}
 						else {
 							hit = false;
@@ -264,7 +258,7 @@ public class StreetFighter extends JFrame {
 			}
 			b.current.start();
 		}
-		if(timer.getInt()<90) {
+		if(timer.getInt()<97) {
 			if(a.getX().getInt()-b.getX().getInt()<-200) {
 				count++;
 				if(count>45) {

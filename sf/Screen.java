@@ -46,7 +46,7 @@ public class Screen extends JPanel {
 		
 		g.setFont(new Font("Times New Roman", Font.BOLD, 36));
 		g.setColor(Color.yellow);
-		g.drawString(""+timer.getInt(), (d.width/2)-25, 90);
+		g.drawString(""+timer.getInt(), 700, 90);
 		
 
 		g.setColor(Color.MAGENTA);
