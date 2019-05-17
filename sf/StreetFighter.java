@@ -68,8 +68,45 @@ public class StreetFighter extends JFrame {
 					for(int i=pressed.size()-1;i>0;i--) {
 						if(pressed.get(i)==KeyEvent.VK_A) {
 							if(pressed.get(i-1)==KeyEvent.VK_DOWN) {
-								a.current = a.ryuCKick;
-								a.current.start();
+
+								if(a.getDirection()==1) {
+									
+									a.current = a.ryuCKick;
+									a.current.start();
+									
+								} else {		
+									a.current = a.ryuCKickR;
+									a.current.reverse2();
+									a.current.start();
+										
+								}
+							}
+						}
+						if(pressed.get(i)==KeyEvent.VK_UP) {
+							if(pressed.get(i-1)==KeyEvent.VK_LEFT) {
+								if(a.getDirection()==1) {
+									a.current = a.ryuFJump;
+									a.current.reverse2();
+									a.current.start();
+									
+								} else {		
+									a.current = a.ryuFJumpR;
+									a.current.reverse2();
+									a.current.start();
+										
+								}
+							}
+							if(pressed.get(i-1)==KeyEvent.VK_RIGHT) {
+								if(a.getDirection()==1) {
+									a.current = a.ryuFJump;
+									a.current.start();
+									
+								} else {		
+									a.current = a.ryuFJumpR;
+								
+									a.current.start();
+										
+								}
 
 							}
 						}
@@ -126,11 +163,13 @@ public class StreetFighter extends JFrame {
 		bc.getSSprite().box.get(0).setLocation(b.getX().getInt()-150,
 				b.getY().getInt()-b.current.getSprite().getHeight());
 
+
 		//facing left
 		ac.getSSprite().box.get(1).setLocation(a.getX().getInt()-a.current.getSprite().getWidth(),
 				a.getY().getInt()-a.current.getSprite().getHeight());
 		bc.getSSprite().box.get(1).setLocation(b.getX().getInt()-b.current.getSprite().getWidth(),
 				b.getY().getInt()-b.current.getSprite().getHeight());
+
 
 		if(a.getDirection()==1) {
 			if(ac.getSSprite().box.get(0).intersects(bc.getSSprite().box.get(1))) {
