@@ -54,7 +54,7 @@ public class AnimatedSprite implements Cloneable {
 	public void reverse2() {
 		tempreverse = true;
 	}
-	public boolean update(MutableInt x, MutableInt y, boolean canMove) {
+	public boolean update(MutableInt x, MutableInt y) {
 
 		int framespersprite = frameDuration/length;
 		if(!stop) {
@@ -74,10 +74,10 @@ public class AnimatedSprite implements Cloneable {
 					currentFrame = 0;
 					frameCount = frameDelay+1;
 				}
-				if(!reverse&&!tempreverse&&canMove) {
+				if(!reverse&&!tempreverse) {
 					x.setInt(x.getInt()+animation[currentFrame].dx());
 					y.setInt(y.getInt()+animation[currentFrame].dy());
-				} else if(canMove){
+				} else {
 					x.setInt(x.getInt()-animation[currentFrame].dx());
 					y.setInt(y.getInt()+animation[currentFrame].dy());
 				}
