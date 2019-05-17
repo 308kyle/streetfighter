@@ -74,10 +74,15 @@ public class Fighter {
 		i2.createBox();
 		i3.createBox();
 		i4.createBox();
+		i1.createBox();
+		i2.createBox();
+		i3.createBox();
+		i4.createBox();
 		ryuIdle = new AnimatedSprite(0, 60, true, true, new Sprite[] {i1,i2,i3,i4});
 		Sprite[] clone = Sprite.clones(new Sprite[] {i1,i2,i3,i4});
 		ryuIdleR = new AnimatedSprite(0, 60, true, true, clone);
 		for(int i=0;i<clone.length;i++) {
+			clone[i].createBox();
 			clone[i].createBox();
 		}
 		
@@ -93,10 +98,16 @@ public class Fighter {
 		w3.createBox();
 		w4.createBox();
 		w5.createBox();
+		w1.createBox();
+		w2.createBox();
+		w3.createBox();
+		w4.createBox();
+		w5.createBox();
 		ryuWalk = new AnimatedSprite(0, 30, true, true, new Sprite[] {w1, w2, w3, w4, w5});
 		clone = Sprite.clones(new Sprite[] {w1, w2, w3, w4, w5});
 		ryuWalkR = new AnimatedSprite(0, 30, true, true, clone);
 		for(int i=0;i<clone.length;i++) {
+			clone[i].createBox();
 			clone[i].createBox();
 		}
 		
@@ -105,6 +116,7 @@ public class Fighter {
 		clone = Sprite.clones(new Sprite[] {w1, w2, w3, w4, w5});
 		ryuWalkLR = new AnimatedSprite(0, 30, true, true, clone);
 		for(int i=0;i<clone.length;i++) {
+			clone[i].createBox();
 			clone[i].createBox();
 		}
 		ryuWalkL.reverse();
@@ -118,10 +130,14 @@ public class Fighter {
 		p11.createBox();
 		p12.createBox();
 		p13.createBox();
+		p11.createBox();
+		p12.createBox();
+		p13.createBox();
 		ryuPunch = new AnimatedSprite(2, 15, false, false, new Sprite[] {p11, p12, p13});
 		clone = Sprite.clones(new Sprite[] {p11, p12, p13});
 		ryuPunchR = new AnimatedSprite(2, 15, false, false, clone);
 		for(int i=0;i<clone.length;i++) {
+			clone[i].createBox();
 			clone[i].createBox();
 		}
 
@@ -136,10 +152,16 @@ public class Fighter {
 		p22.createBox();
 		p23.createBox();
 		p24.createBox();
+		p25.createBox();
+		p21.createBox();
+		p22.createBox();
+		p23.createBox();
+		p24.createBox();
 		ryuPunch2 = new AnimatedSprite(5, 35, false, false, new Sprite[] {p21, p22, p23, p24, p25});
 		clone = Sprite.clones(new Sprite[] {p21, p22, p23, p24, p25});
 		ryuPunch2R = new AnimatedSprite(5, 35, false, false, clone);
 		for(int i=0;i<clone.length;i++) {
+			clone[i].createBox();
 			clone[i].createBox();
 		}
 		
@@ -157,10 +179,18 @@ public class Fighter {
 		j5.createBox();
 		j6.createBox();
 		j7.createBox();
+		j1.createBox();
+		j2.createBox();
+		j3.createBox();
+		j4.createBox();
+		j5.createBox();
+		j6.createBox();
+		j7.createBox();
 		ryuJump = new AnimatedSprite(5, 60, false, false, new Sprite[] {j1, j2, j3, j4, j5, j6, j7});
 		clone = Sprite.clones(new Sprite[] {j1, j2, j3, j4, j5, j6, j7});
 		ryuJumpR = new AnimatedSprite(5, 60, false, false, clone);
 		for(int i=0;i<clone.length;i++) {
+			clone[i].createBox();
 			clone[i].createBox();
 		}
 
@@ -172,10 +202,15 @@ public class Fighter {
 		h2.createBox();
 		h3.createBox();
 		h4.createBox();
+		h1.createBox();
+		h2.createBox();
+		h3.createBox();
+		h4.createBox();
 		ryuHit = new AnimatedSprite(0, 28, false, true, new Sprite[] {h1, h2, h3, h4});
 		clone = Sprite.clones(new Sprite[] {h1, h2, h3, h4});
 		ryuHitR = new AnimatedSprite(0, 28, false, true, clone);
 		for(int i=0;i<clone.length;i++) {
+			clone[i].createBox();
 			clone[i].createBox();
 		}
 
@@ -187,10 +222,15 @@ public class Fighter {
 		fh2.createBox();
 		fh3.createBox();
 		fh4.createBox();
+		fh1.createBox();
+		fh2.createBox();
+		fh3.createBox();
+		fh4.createBox();
 		ryuFHit = new AnimatedSprite(0, 28, false, false, new Sprite[] {fh1, fh2, fh3, fh4});
 		clone = Sprite.clones(new Sprite[] {fh1, fh2, fh3, fh4});
 		ryuFHitR = new AnimatedSprite(0, 28, false, false, clone);
 		for(int i=0;i<clone.length;i++) {
+			clone[i].createBox();
 			clone[i].createBox();
 		}
 
@@ -200,15 +240,17 @@ public class Fighter {
 		ryuV1 = new AnimatedSprite(0, 27, false, false, new Sprite[] {v1, v2, v3});
 		clone = Sprite.clones(new Sprite[] {v1, v2, v3});
 		ryuV1R = new AnimatedSprite(0, 27, false, false, clone);
-		for(int i=0;i<clone.length;i++) {
-			clone[i].createBox();
-		}
 
 		Sprite ko1 = new Sprite(1165, 781, 1165+46-1, 781+60-1, 0, 0, s);
 		Sprite ko2 = new Sprite(1218, 789, 1218+73-1, 789+43-1, 0, 0, s);
 		Sprite ko3 = new Sprite(1295, 806, 1295+75-1, 806+31-1, 0, 0, s);
 		Sprite ko4 = new Sprite(1373, 789, 1373+73-1, 789+43-1, 0, 0, s);
 		Sprite ko5 = new Sprite(1450, 806, 1450+75-1, 806+31-1, 0, 0, s);
+		ko5.createBox();
+		ko1.createBox();
+		ko2.createBox();
+		ko3.createBox();
+		ko4.createBox();
 		ko5.createBox();
 		ko1.createBox();
 		ko2.createBox();
@@ -233,32 +275,47 @@ public class Fighter {
 		k6.createBox();
 		k7.createBox();
 		k8.createBox();
+		k1.createBox();
+		k2.createBox();
+		k3.createBox();
+		k4.createBox();
+		k5.createBox();
+		k6.createBox();
+		k7.createBox();
+		k8.createBox();
 		ryuKnock = new AnimatedSprite(0, 56, false, false, new Sprite[] {k1, k2, k3, k4, k5, k6, k7, k8});
 		clone = Sprite.clones(new Sprite[] {k1, k2, k3, k4, k5, k6, k7, k8});
 		ryuKnockR = new AnimatedSprite(0, 56, false, false, clone);
 		for(int i=0;i<clone.length;i++) {
 			clone[i].createBox();
+			clone[i].createBox();
 		}
 		
 		Sprite b1 = new Sprite(1211, 16, 1211+44-1, 16+84-1, 0, 0, s);
+		b1.createBox();
 		b1.createBox();
 		ryuBlock = new AnimatedSprite(0, 40, false, false, new Sprite[] {b1});
 		clone = Sprite.clones(new Sprite[] {b1});
 		ryuBlockR = new AnimatedSprite(0, 40, false, false, clone);
 		for(int i=0;i<clone.length;i++) {
 			clone[i].createBox();
+			clone[i].createBox();
 		}
 
 		Sprite b2 = new Sprite(1260, 38, 1260+44-1, 38+62-1, 0, 0, s);
+		b2.createBox();
+		b2.createBox();
 		ryuCBlock = new AnimatedSprite(0, 40, false, false, new Sprite[] {b2});
 		ryuCBlockR = new AnimatedSprite(0, 40, false, false, Sprite.clones(new Sprite[] {b2}));
 
 		Sprite c1 = new Sprite(1160, 44, 1160+44-1, 44+56-1, 0, 0, s);
 		c1.createBox();
+		c1.createBox();
 		ryuCrouch = new AnimatedSprite(0, 56, true, true, new Sprite[] {c1});
 		clone = Sprite.clones(new Sprite[] {c1});
 		ryuCrouchR = new AnimatedSprite(0, 56, true, true, clone);
 		for(int i=0;i<clone.length;i++) {
+			clone[i].createBox();
 			clone[i].createBox();
 		}
 
@@ -266,10 +323,13 @@ public class Fighter {
 		Sprite ck2 = new Sprite(714, 417, 714+72-1, 417+58-1, 0, 0, s);
 		ck1.createBox();
 		ck2.createBox();
+		ck1.createBox();
+		ck2.createBox();
 		ryuCKick = new AnimatedSprite(0, 15, false, false, new Sprite[] {ck1, ck2, ck1});
 		clone = Sprite.clones(new Sprite[] {ck1, ck2, ck1});
 		ryuCKickR = new AnimatedSprite(0, 15, false, false, clone);
 		for(int i=0;i<clone.length;i++) {
+			clone[i].createBox();
 			clone[i].createBox();
 		}
 		
@@ -288,10 +348,18 @@ public class Fighter {
 		f5.createBox();
 		f6.createBox();
 		f7.createBox();
+		f1.createBox();
+		f2.createBox();
+		f3.createBox();
+		f4.createBox();
+		f5.createBox();
+		f6.createBox();
+		f7.createBox();
 		ryuFJump = new AnimatedSprite(5,60,false,false,new Sprite[] {f1,f2,f3,f4,f5,f6,f7});
 		clone = Sprite.clones(new Sprite[] {f1,f2,f3,f4,f5,f6,f7});
 		ryuFJumpR = new AnimatedSprite(5,60,false,false,clone);
 		for(int i=0;i<clone.length;i++) {
+			clone[i].createBox();
 			clone[i].createBox();
 		}
 		
